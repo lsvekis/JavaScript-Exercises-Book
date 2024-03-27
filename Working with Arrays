@@ -1,0 +1,12 @@
+// Objective: Learn how to declare, modify, and access array elements.
+// 1. Declare an array named fruits and initialize it with three strings: "Apple", "Banana", and "Cherry".
+let fruits = ["Apple", "Banana", "Cherry"];
+// 2. Print the first element of the array to the console.
+console.log("First fruit: " + fruits[0]);
+// 3. Add a new element "Dragonfruit" to the end of the array.
+fruits.push("Dragonfruit");
+// 4. Replace the second element ("Banana") with "Blueberry".
+fruits[1] = "Blueberry";
+// 5. Print the entire array to the console.
+console.log("Updated fruits: ", fruits);
+// Exercise: Try adding and modifying elements in the array. Explore methods like pop(), shift(), and unshift().

@@ -1,0 +1,9 @@
+// Objective: Learn to use loops to process and print each element in an array.
+// 1. Declare an array named numbers with values from 1 to 5.
+let numbers = [1, 2, 3, 4, 5];
+// 2. Use a for loop to iterate over the array and print each number.
+for (let i = 0; i < numbers.length; i++) {
+ console.log("Number: " + numbers[i]);
+}
+// 3. Try modifying the array or the loop to familiarize yourself with looping through arrays.
+// Exercise: Modify the loop to print only even numbers from the array.

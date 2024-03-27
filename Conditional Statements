@@ -1,0 +1,11 @@
+// Objective: Use conditional statements to perform different actions based on variable values.
+// 1. Declare a variable named score and assign it a value of 75.
+let score = 75;
+// 2. Use an if-else statement to print "Pass" if score is 60 or above, otherwise print "Fail".
+if (score >= 60) {
+ console.log("Pass");
+} else {
+ console.log("Fail");
+}
+// 3. Modify the score variable and observe how the output changes.
+// Exercise: Add more conditions to cover grades (A, B, C, D, F) based on the score.

@@ -1,0 +1,10 @@
+// Objective: Learn to manipulate and interact with strings using various methods.
+// 1. Declare a string variable named greeting and assign it the value "Hello, World!".
+let greeting = "Hello, World!";
+// 2. Use the toUpperCase method to print the greeting in uppercase.
+console.log(greeting.toUpperCase());
+// 3. Use the replace method to replace "World" with "JavaScript".
+let newGreeting = greeting.replace("World", "JavaScript");
+// 4. Print the new greeting to the console.
+console.log(newGreeting);
+// Exercise: Try other string methods like slice(), indexOf(), and includes(). Experiment with different string values and operations.

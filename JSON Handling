@@ -1,0 +1,14 @@
+// Objective: Learn to parse JSON strings and stringify JavaScript objects.
+// 1. Declare a JSON string representing an object with name and age properties.
+let jsonString = '{"name": "Alex", "age": 30}';
+// 2. Parse the JSON string into a JavaScript object.
+let personObject = JSON.parse(jsonString);
+// 3. Print the name and age of the person to the console.
+console.log("Name: " + personObject.name + ", Age: " + personObject.age);
+// 4. Modify the age property of the person object.
+personObject.age = 31;
+// 5. Stringify the modified object back into a JSON string.
+let modifiedJsonString = JSON.stringify(personObject);
+// 6. Print the modified JSON string to the console.
+console.log("Modified JSON: " + modifiedJsonString);
+// Exercise: Create a more complex JSON string representing an array of objects, parse it, modify one of the objects, and stringify it back into JSON.

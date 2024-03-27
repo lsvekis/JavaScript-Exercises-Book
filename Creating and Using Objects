@@ -1,0 +1,23 @@
+// Objective: Learn to create, access, and modify properties of JavaScript objects.
+// 1. Create an object named student with properties: name (string), age (number), and grades (array of numbers).
+let student = {
+ name: "Alex",
+ age: 20,
+ grades: [88, 76, 92, 85]
+};
+// 2. Print the student's name and age to the console.
+console.log("Student Name: " + student.name + ", Age: " + student.age);
+// 3. Add a new property to the student object named "major" and assign it a value of "Computer Science".
+student.major = "Computer Science";
+// 4. Write a function that calculates and returns the average grade from the grades array.
+function calculateAverage(grades) {
+ let sum = 0;
+ for (let grade of grades) {
+ sum += grade;
+ }
+ return sum / grades.length;
+}
+// 5. Call the function with the student's grades and print the average grade to the console.
+let averageGrade = calculateAverage(student.grades);
+console.log("Average Grade: " + averageGrade);
+// Exercise: Try adding more properties and functions to the student object. For instance, add a function to update the student's major.

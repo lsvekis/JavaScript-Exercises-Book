@@ -1,0 +1,11 @@
+// Objective: Create a function that takes two numbers as parameters and returns their sum.
+// 1. Define a function named addNumbers that takes two parameters: num1 and num2.
+function addNumbers(num1, num2) {
+ // 2. Return the sum of num1 and num2.
+ return num1 + num2;
+}
+// 3. Call the function with two numbers as arguments and store the result in a variable.
+let result = addNumbers(5, 7);
+// 4. Print the result to the console.
+console.log("The sum is: " + result);
+// Exercise: Create another function that multiplies two numbers and returns the result. Test it with different inputs.

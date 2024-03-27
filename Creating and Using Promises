@@ -1,0 +1,22 @@
+// Objective: Learn how to create and use Promises to handle asynchronous operations.
+// 1. Create a new Promise that simulates a simple data fetching operation.
+let fetchData = new Promise((resolve, reject) => {
+ // Simulate a delay using setTimeout
+ setTimeout(() => {
+ // Simulate a condition where the data fetching is successful
+ let success = true;
+ if (success) {
+ resolve("Data fetched successfully!");
+ } else {
+ reject("Data fetching failed.");
+ }
+ }, 2000); // 2-second delay
+});
+// 2. Use the .then() method to handle the resolved promise and print the result.
+fetchData.then((message) => {
+ console.log(message);
+}).catch((error) => {
+ // 3. Use the .catch() method to handle any errors.
+ console.error(error);
+});
+// Exercise: Modify the success condition to simulate a failed data fetch and observe the error handling. Try creating promises for different asynchronous tasks.

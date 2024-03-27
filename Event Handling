@@ -1,0 +1,20 @@
+<!-- Objective: Create a simple web page with a button that changes color when clicked. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Event Handling Example</title>
+</head>
+<body>
+<button id="colorButton">Change Color</button>
+<script>
+ // 1. Select the button element by its ID.
+ let button = document.getElementById('colorButton');
+ // 2. Add an event listener to the button for the 'click' event.
+ button.addEventListener('click', function() {
+ // 3. Change the button's background color when it is clicked.
+ this.style.backgroundColor = 'lightblue';
+ });
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!-- Objective: Develop a to-do list application that stores tasks in local storage. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>To-Do List with Local Storage</title>
+</head>
+<body>
+<input type="text" id="taskInput" placeholder="Enter a new task...">
+<button id="addTask">Add Task</button>
+<ul id="taskList"></ul>
+<script>
+ const addTaskButton = document.getElementById('addTask');
+ const taskInput = document.getElementById('taskInput');
+ const taskList = document.getElementById('taskList');
+ // Function to add a task
+ function addTask(task) {
+ const li = document.createElement('li');
+ li.textContent = task;
+ taskList.appendChild(li);
+ saveTasks();
+ }
+ // Function to save tasks to local storage
+ function saveTasks() {
+ const tasks = [];
+ taskList.querySelectorAll('li').forEach(task => {
+ tasks.push(task.textContent);
+ });
+ localStorage.setItem('tasks', JSON.stringify(tasks));
+ }
+ // Function to load tasks from local storage
+ function loadTasks() {
+ const tasks = JSON.parse(localStorage.getItem('tasks'));
+ if (tasks) {
+ tasks.forEach(task => addTask(task));
+ }
+ }
+ // Load tasks on page load
+ window.addEventListener('load', loadTasks);
+ // Add task event listener
+ addTaskButton.addEventListener('click', () => {
+ const task = taskInput.value.trim();
+ if (task) {
+ addTask(task);
+ taskInput.value = '';
+ }
+ });
+</script>
+</body>
+</html>

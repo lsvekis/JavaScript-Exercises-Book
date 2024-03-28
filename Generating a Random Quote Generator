@@ -1,0 +1,24 @@
+<!-- Objective: Create a random quote generator. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Random Quote Generator</title>
+</head>
+<body>
+<div id="quoteDisplay"></div>
+<button id="newQuoteButton">Show New Quote</button>
+<script>
+ const quotes = [
+ "The greatest glory in living lies not in never falling, but in rising every time we fall. - Nelson Mandela",
+ "The way to get started is to quit talking and begin doing. - Walt Disney",
+ "Life is what happens when you're busy making other plans. - John Lennon"
+ // Add more quotes as desired
+ ];
+ document.getElementById('newQuoteButton').addEventListener('click', function() {
+ const randomIndex = Math.floor(Math.random() * quotes.length);
+ document.getElementById('quoteDisplay').textContent = quotes[randomIndex];
+ });
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!-- Objective: Implement real-time filtering in a list. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Real-time List Filtering</title>
+</head>
+<body>
+<input type="text" id="filterInput" placeholder="Filter list...">
+<ul id="dataList">
+ <li>Apple</li>
+ <li>Banana</li>
+ <li>Cherry</li>
+ <li>Date</li>
+ <li>Elderberry</li>
+ <!-- Add more list items as needed -->
+</ul>
+<script>
+ const filterInput = document.getElementById('filterInput');
+ const dataList = document.getElementById('dataList');
+ const items = dataList.querySelectorAll('li');
+ filterInput.addEventListener('keyup', function() {
+ const searchValue = this.value.toLowerCase();
+ items.forEach(item => {
+ if (item.textContent.toLowerCase().includes(searchValue)) {
+ item.style.display = '';
+ } else {
+ item.style.display = 'none';
+ }
+ });
+ });
+</script>
+</body>
+</html>

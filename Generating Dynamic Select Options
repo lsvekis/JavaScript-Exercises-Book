@@ -1,0 +1,17 @@
+// Objective: Dynamically generate select options from an array of data.
+// Array of options
+const options = ['Option 1', 'Option 2', 'Option 3'];
+// Function to generate select options
+function generateSelectOptions(optionArray) {
+ const selectElement = document.createElement('select');
+ optionArray.forEach(option => {
+ const optionElement = document.createElement('option');
+ optionElement.textContent = option;
+ optionElement.value = option;
+ selectElement.appendChild(optionElement);
+ });
+ document.body.appendChild(selectElement);
+}
+// Call the function to generate options
+generateSelectOptions(options);
+// Exercise: Modify this function to accept an array of objects, each with a label and value for the option, and update the generation logic accordingly.

@@ -1,0 +1,61 @@
+<!-- Objective: Develop an interactive quiz with score tracking. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Interactive Quiz</title>
+</head>
+<body>
+<div id="quizContainer"></div>
+<button id="nextQuestion">Next Question</button>
+<div>Score: <span id="score">0</span></div>
+<script>
+ const questions = [
+ { question: "What is the capital of France?", answers: ["Paris", "London", "Berlin", "Madrid"], correct: 0 },
+ {question: "What is 2 + 2?", answers: ["3", "4", "5", "6"], correct: 1 },
+// Add more questions as needed
+];
+let currentQuestionIndex = 0;
+let score = 0;
+const quizContainer = document.getElementById('quizContainer');
+const nextQuestionButton = document.getElementById('nextQuestion');
+const scoreDisplay = document.getElementById('score');
+function displayQuestion(questionIndex) {
+ quizContainer.innerHTML = ''; // Clear previous question
+ const questionObj = questions[questionIndex];
+ const questionText = document.createElement('div');
+ questionText.textContent = questionObj.question;
+ quizContainer.appendChild(questionText);
+ questionObj.answers.forEach((answer, index) => {
+ const answerButton = document.createElement('button');
+ answerButton.textContent = answer;
+ answerButton.addEventListener('click', () => checkAnswer(index, questionObj.correct));
+ quizContainer.appendChild(answerButton);
+ });
+}
+function checkAnswer(selectedIndex, correctIndex) {
+ if (selectedIndex === correctIndex) {
+ score++;
+ scoreDisplay.textContent = score;
+ alert('Correct!');
+ } else {
+ alert('Wrong Answer. Try again!');
+ }
+ if (currentQuestionIndex < questions.length - 1) {
+ currentQuestionIndex++;
+ displayQuestion(currentQuestionIndex);
+ } else {
+ quizContainer.innerHTML = `<div>Quiz Completed! Final Score: ${score} / ${questions.length}</div>`;
+ nextQuestionButton.style.display = 'none'; // Hide the next button
+ }
+}
+nextQuestionButton.addEventListener('click', () => {
+ if (currentQuestionIndex < questions.length - 1) {
+ currentQuestionIndex++;
+ displayQuestion(currentQuestionIndex);
+ }
+});
+displayQuestion(currentQuestionIndex); // Initialize first question
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!-- Objective: Create a simple encryption and decryption tool. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Simple Encryption/Decryption Tool</title>
+</head>
+<body>
+<textarea id="inputText" placeholder="Enter text..."></textarea>
+<button id="encryptButton">Encrypt</button>
+<button id="decryptButton">Decrypt</button>
+<div>Result: <span id="resultText"></span></div>
+<script>
+ const shift = 3; // Example shift for Caesar cipher
+ function caesarCipher(str, isEncrypting) {
+ return str.replace(/[a-z]/gi, function(char) {
+ const startCode = char <= 'Z' ? 65 : 97;
+ const charCode = ((char.charCodeAt(0) + (isEncrypting ? shift : -shift) - startCode) % 26 + 26) % 26 + startCode;
+ return String.fromCharCode(charCode);
+ });
+ }
+ document.getElementById('encryptButton').addEventListener('click', function() {
+ const inputText = document.getElementById('inputText').value;
+ document.getElementById('resultText').textContent = caesarCipher(inputText, true);
+ });
+ document.getElementById('decryptButton').addEventListener('click', function() {
+ const inputText = document.getElementById('inputText').value;
+ document.getElementById('resultText').textContent = caesarCipher(inputText, false);
+ });
+</script>
+</body>
+</html>

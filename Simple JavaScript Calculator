@@ -1,0 +1,25 @@
+<!-- Objective: Develop a simple calculator for basic arithmetic operations. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Simple Calculator</title>
+</head>
+<body>
+<input type="number" id="num1" placeholder="Number 1">
+<input type="number" id="num2" placeholder="Number 2">
+<button id="add">+</button>
+<button id="subtract">-</button>
+<button id="multiply">*</button>
+<button id="divide">/</button>
+<div id="result"></div>
+<script>
+ document.getElementById("add").addEventListener("click", function() {
+ const num1 = parseFloat(document.getElementById("num1").value);
+ const num2 = parseFloat(document.getElementById("num2").value);
+ document.getElementById("result").textContent = "Result: " + (num1 + num2);
+ });
+ // Add event listeners for subtract, multiply, and divide buttons with similar logic
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!-- Objective: Create a simple image carousel. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Basic Carousel</title>
+ <style>
+ #carousel {
+ width: 600px;
+ overflow: hidden;
+ margin: auto;
+ }
+ .carousel-images {
+ display: flex;
+ transition: transform 0.5s ease;
+ }
+ .carousel-image {
+ max-width: 600px;
+ display: block;
+ }
+ .control-btn {
+ cursor: pointer;
+ padding: 10px;
+ background-color: #ddd;
+ border: none;
+ }
+ </style>
+</head>
+<body>
+<div id="carousel">
+ <div class="carousel-images">
+ <img class="carousel-image" src="image1.jpg" alt="Image 1">
+ <img class="carousel-image" src="image2.jpg" alt="Image 2">
+ <img class="carousel-image" src="image3.jpg" alt="Image 3">
+ <!-- More images as needed -->
+ </div>
+</div>
+<button class="control-btn" id="prev">Previous</button>
+<button class="control-btn" id="next">Next</button>
+<script>
+ const imagesContainer = document.querySelector('.carousel-images');
+ const images = document.querySelectorAll('.carousel-image');
+ let index = 0;
+ function updateCarousel() {
+ const offset = -index * 600; // Assuming each image is 600px wide
+ imagesContainer.style.transform = `translateX(${offset}px)`;
+ }
+ document.getElementById('next').addEventListener('click', () => {
+ index = (index + 1) % images.length;
+ updateCarousel();
+ });
+ document.getElementById('prev').addEventListener('click', () => {
+ index = (index - 1 + images.length) % images.length;
+ updateCarousel();
+ });
+ // Optional: Automatically cycle through images
+ setInterval(() => {
+ index = (index + 1) % images.length;
+ updateCarousel();
+ }, 3000);
+</script>
+</body>
+</html>

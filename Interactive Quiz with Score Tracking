@@ -1,0 +1,46 @@
+<!-- Objective: Build an interactive quiz with score tracking. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Interactive Quiz</title>
+</head>
+<body>
+<div id="quizContainer"></div>
+<button id="nextQuestion">Next Question</button>
+<div>Score: <span id="score">0</span></div>
+<script>
+ const questions = [
+ { question: "What is the capital of France?", answer: "Paris" },
+ { question: "What is 2 + 2?", answer: "4" },
+ // Add more questions
+ ];
+ let currentQuestionIndex = 0;
+ let userScore = 0;
+ const quizContainer = document.getElementById('quizContainer');
+ const scoreDisplay = document.getElementById('score');
+ const nextQuestionButton = document.getElementById('nextQuestion');
+ function displayQuestion(index) {
+ quizContainer.innerHTML = `<p>${questions[index].question}</p><input type='text' id='userAnswer'><button onclick='checkAnswer()'>Submit</button>`;
+ }
+ function checkAnswer() {
+ const userAnswer = document.getElementById('userAnswer').value;
+ if (userAnswer.trim().toLowerCase() === questions[currentQuestionIndex].answer.toLowerCase()) {
+ userScore++;
+ scoreDisplay.textContent = userScore;
+ }
+ currentQuestionIndex++;
+ if (currentQuestionIndex < questions.length) {
+ displayQuestion(currentQuestionIndex);
+ } else {
+ quizContainer.innerHTML = "<p>Quiz completed!</p>";
+ nextQuestionButton.style.display = 'none';
+ }
+ }
+ nextQuestionButton.addEventListener('click', () => {
+ displayQuestion(currentQuestionIndex);
+ });
+ displayQuestion(currentQuestionIndex); // Initialize the first question
+</script>
+</body>
+</html>

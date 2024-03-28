@@ -1,0 +1,28 @@
+<!-- Objective: Create a basic todo list application where users can add and view tasks. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Todo List</title>
+</head>
+<body>
+<input type="text" id="todoInput" placeholder="Add a new todo...">
+<button id="addTodo">Add Todo</button>
+<ul id="todoList"></ul>
+<script>
+ const addButton = document.getElementById('addTodo');
+ const todoInput = document.getElementById('todoInput');
+ const todoList = document.getElementById('todoList');
+ addButton.addEventListener('click', () => {
+ const task = todoInput.value;
+ if (task) {
+ const listItem = document.createElement('li');
+ listItem.textContent = task;
+ todoList.appendChild(listItem);
+ todoInput.value = ''; // Clear the input field
+ }
+ });
+</script>
+</body>
+</html>
+// Exercise: Enhance this application by allowing users to mark tasks as completed or delete tasks.

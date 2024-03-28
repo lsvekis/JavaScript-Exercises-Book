@@ -1,0 +1,56 @@
+<!-- Objective: Develop a basic todo list with filtering functionality. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Todo List with Filters</title>
+</head>
+<body>
+<input type="text" id="todoInput" placeholder="Add a new task...">
+<button id="addTodo">Add</button>
+<ul id="todoList"></ul>
+<button id="filterAll">All</button>
+<button id="filterCompleted">Completed</button>
+<button id="filterRemaining">Remaining</button>
+<script>
+ const addTodo = document.getElementById('addTodo');
+const todoInput = document.getElementById('todoInput');
+const todoList = document.getElementById('todoList');
+const filterAll = document.getElementById('filterAll');
+const filterCompleted = document.getElementById('filterCompleted');
+const filterRemaining = document.getElementById('filterRemaining');
+let todos = [];
+function renderTodos(filter = 'all') {
+ todoList.innerHTML = '';
+ let filteredTodos = todos;
+ if (filter === 'completed') {
+ filteredTodos = todos.filter(todo => todo.completed);
+ } else if (filter === 'remaining') {
+ filteredTodos = todos.filter(todo => !todo.completed);
+ }
+ filteredTodos.forEach(todo => {
+ const li = document.createElement('li');
+ li.textContent = todo.text;
+ li.style.textDecoration = todo.completed ? 'line-through' : 'none';
+ li.addEventListener('click', () => {
+ todo.completed = !todo.completed;
+ renderTodos(filter);
+ });
+ todoList.appendChild(li);
+ });
+}
+addTodo.addEventListener('click', () => {
+ const todoText = todoInput.value.trim();
+ if (todoText) {
+ todos.push({ text: todoText, completed: false });
+ todoInput.value = '';
+ renderTodos();
+ }
+});
+filterAll.addEventListener('click', () => renderTodos('all'));
+filterCompleted.addEventListener('click', () => renderTodos('completed'));
+filterRemaining.addEventListener('click', () => renderTodos('remaining'));
+renderTodos();
+</script>
+</body>
+</html>

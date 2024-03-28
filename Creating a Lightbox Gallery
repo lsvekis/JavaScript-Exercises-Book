@@ -1,0 +1,51 @@
+<!-- Objective: Build a lightbox gallery for displaying images. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Lightbox Gallery</title>
+ <style>
+ .lightbox {
+ display: none;
+ position: fixed;
+ z-index: 2;
+ left: 0;
+ top: 0;
+ width: 100%;
+ height: 100%;
+ background-color: rgba(0, 0, 0, 0.8);
+ }
+ .lightbox img {
+ margin: auto;
+ display: block;
+ max-width: 80%;
+ max-height: 80%;
+ position: relative;
+ top: 50%;
+ transform: translateY(-50%);
+ }
+ </style>
+</head>
+<body>
+<div class="thumbnails">
+ <img src="image1_thumb.jpg" data-full="image1.jpg" alt="">
+ <img src="image2_thumb.jpg" data-full="image2.jpg" alt="">
+ <!-- Add more thumbnails as needed -->
+</div>
+<div class="lightbox">
+ <img src="" alt="">
+</div>
+<script>
+ document.querySelectorAll('.thumbnails img').forEach(img => {
+ img.addEventListener('click', function() {
+ const lightbox = document.querySelector('.lightbox');
+ lightbox.style.display = 'block';
+ lightbox.querySelector('img').src = this.getAttribute('data-full');
+ });
+ });
+ document.querySelector('.lightbox').addEventListener('click', function() {
+ this.style.display = 'none';
+ });
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Simple Encryption/Decryption Tool</title>
+</head>
+<body>
+<textarea id="inputText" placeholder="Enter text..."></textarea>
+<button id="encryptButton">Encrypt</button>
+<button id="decryptButton">Decrypt</button>
+<div>Result: <span id="resultText"></span></div>
+<script>
+ const shift = 3; // Example shift for Caesar cipher
+ function caesarCipher(str, isEncrypting) {
+   return str.replace(/[a-z]/gi, function(char) {
+     const isUpperCase = char === char.toUpperCase();
+     let startCode = isUpperCase ? 65 : 97; // ASCII codes: 65 for 'A', 97 for 'a'
+     let charCode = char.charCodeAt(0) - startCode; // Get 0-25 range character code
+     if (isEncrypting) {
+       charCode = (charCode + shift) % 26; // Encrypt
+     } else {
+       charCode = (charCode - shift + 26) % 26; // Decrypt, ensure non-negative
+     }
+     return String.fromCharCode(charCode + startCode); // Convert back to ASCII
+   });
+ }
+ document.getElementById('encryptButton').addEventListener('click', function() {
+   const inputText = document.getElementById('inputText').value;
+   document.getElementById('resultText').textContent = caesarCipher(inputText, true);
+ });
+ document.getElementById('decryptButton').addEventListener('click', function() {
+   const inputText = document.getElementById('inputText').value;
+   document.getElementById('resultText').textContent = caesarCipher(inputText, false);
+ });
+</script>
+</body>
+</html>

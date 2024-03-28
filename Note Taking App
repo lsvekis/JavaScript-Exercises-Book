@@ -1,0 +1,52 @@
+<!-- Objective: Create a note-taking app that allows adding, viewing, and deleting notes. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Note Taking App</title>
+</head>
+<body>
+<input type="text" id="noteInput" placeholder="Enter a note">
+<button id="addNote">Add Note</button>
+<ul id="noteList"></ul>
+<script>
+ const addNoteButton = document.getElementById('addNote');
+ const noteInput = document.getElementById('noteInput');
+ const noteList = document.getElementById('noteList');
+ function saveNotes() {
+ const notes = [];
+ document.querySelectorAll('#noteList li').forEach(note => {
+ notes.push(note.textContent.replace('Delete', '').trim());
+ });
+ localStorage.setItem('notes', JSON.stringify(notes));
+ }
+ function loadNotes() {
+ const notes = JSON.parse(localStorage.getItem('notes')) || [];
+ notes.forEach(note => {
+ addNoteToList(note);
+ });
+ }
+ function addNoteToList(note) {
+const li = document.createElement('li');
+ li.textContent = note + ' ';
+ const deleteButton = document.createElement('button');
+ deleteButton.textContent = 'Delete';
+ deleteButton.addEventListener('click', () => {
+ noteList.removeChild(li);
+ saveNotes();
+ });
+ li.appendChild(deleteButton);
+ noteList.appendChild(li);
+}
+addNoteButton.addEventListener('click', () => {
+ const note = noteInput.value.trim();
+ if (note) {
+ addNoteToList(note);
+ saveNotes();
+ noteInput.value = ''; // Clear input after adding
+ }
+});
+loadNotes();
+</script>
+</body>
+</html>

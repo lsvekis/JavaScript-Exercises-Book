@@ -1,0 +1,21 @@
+// Objective: Learn to define classes and use inheritance.
+// 1. Define a base class named Animal with a constructor that takes a name and sets it on the instance.
+class Animal {
+ constructor(name) {
+ this.name = name;
+ }
+ speak() {
+ console.log(`${this.name} makes a noise.`);
+ }
+}
+// 2. Define a subclass named Dog that extends Animal.
+class Dog extends Animal {
+ speak() {
+ super.speak(); // Call the parent method with super
+ console.log(`${this.name} barks.`);
+ }
+}
+// 3. Create an instance of Dog and call its speak method.
+const dog = new Dog('Rex');
+dog.speak();
+// Exercise: Extend this example by creating more animal subclasses with unique behaviors and test them.

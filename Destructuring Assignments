@@ -1,0 +1,13 @@
+// Objective: Learn to extract data from arrays and objects using destructuring.
+// 1. Destructure an array to extract its first two elements into variables.
+const colors = ["red", "green", "blue"];
+const [firstColor, secondColor] = colors;
+console.log(firstColor, secondColor); // red green
+// 2. Destructure an object to extract two properties into variables.
+const user = {
+ name: "Alex",
+ age: 30
+};
+const {name, age} = user;
+console.log(name, age); // Alex 30
+// Exercise: Try destructuring nested objects and arrays, and use the rest syntax to capture the remaining elements or properties.

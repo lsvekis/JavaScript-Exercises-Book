@@ -1,0 +1,43 @@
+<!-- Objective: Create a dynamic table that displays data from an array of objects. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Dynamic Table Generation</title>
+</head>
+<body>
+<table id="dataTable">
+ <thead>
+ <tr>
+ <th>Name</th>
+ <th>Age</th>
+ <th>City</th>
+ </tr>
+ </thead>
+ <tbody>
+ </tbody>
+</table>
+<script>
+ const data = [
+ { name: "Alice", age: 30, city: "New York" },
+ { name: "Bob", age: 25, city: "Paris" },
+ { name: "Charlie", age: 35, city: "London" }
+ // More data can be added here
+ ];
+ function generateTable(data) {
+ const tbody = document.querySelector("#dataTable tbody");
+ tbody.innerHTML = ""; // Clear existing table body
+ data.forEach(item => {
+ const tr = document.createElement("tr");
+ Object.values(item).forEach(text => {
+ const td = document.createElement("td");
+ td.textContent = text;
+ tr.appendChild(td);
+ });
+ tbody.appendChild(tr);
+ });
+ }
+ generateTable(data);
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!-- Objective: Develop a simple image slider with thumbnails. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Image Slider with Thumbnails</title>
+ <style>
+ .thumbnail {
+ cursor: pointer;
+ opacity: 0.6;
+ transition: opacity 0.2s ease;
+ }
+.thumbnail:hover {
+ opacity: 1;
+ }
+ .main-image {
+ width: 100%;
+ height: auto;
+ }
+</style>
+</head>
+<body>
+<div id="mainImageContainer">
+    <img class="main-image" src="image1.jpg" alt="Main Display">
+</div>
+<div id="thumbnailContainer">
+    <img class="thumbnail" src="image1_thumb.jpg" alt="Thumbnail 1">
+    <img class="thumbnail" src="image2_thumb.jpg" alt="Thumbnail 2">
+    <img class="thumbnail" src="image3_thumb.jpg" alt="Thumbnail 3">
+    <!-- More thumbnails as needed -->
+</div>
+<script>
+    document.querySelectorAll('.thumbnail').forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            const mainImage = document.querySelector('.main-image');
+            mainImage.src = this.src.replace('_thumb', ''); // Assuming the main image file path can be derived by removing '_thumb' from the thumbnail's src
+        });
+    });
+</script>
+</body>
+</html>

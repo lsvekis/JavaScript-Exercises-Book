@@ -1,0 +1,26 @@
+<!-- Objective: Develop functionality for image upload and preview. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Image Upload and Preview</title>
+</head>
+<body>
+<input type="file" id="imageInput" accept="image/*">
+<div id="imagePreview" style="width: 300px; height: 300px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+ <img src="" alt="Preview" style="width: auto; height: 100%;">
+</div>
+<script>
+ document.getElementById('imageInput').addEventListener('change', function(event) {
+ const file = event.target.files[0];
+ if (file) {
+ const reader = new FileReader();
+ reader.onload = function(e) {
+ document.querySelector('#imagePreview img').src = e.target.result;
+ };
+ reader.readAsDataURL(file);
+ }
+ });
+</script>
+</body>
+</html>

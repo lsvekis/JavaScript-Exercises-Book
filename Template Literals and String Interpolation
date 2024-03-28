@@ -1,0 +1,9 @@
+// Objective: Learn to use template literals for string creation and interpolation.
+// 1. Declare variables for a user's name and age.
+let userName = "Alex";
+let userAge = 30;
+// 2. Use a template literal to create a greeting string that includes the user's name and age.
+let greeting = `Hello, my name is ${userName} and I am ${userAge} years old.`;
+// 3. Print the greeting to the console.
+console.log(greeting);
+// Exercise: Experiment with template literals to create more complex strings, including expressions and multi-line strings.

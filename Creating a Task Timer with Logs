@@ -1,0 +1,55 @@
+<!-- Objective: Build a task timer with start, pause, and log functionality. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Task Timer with Logs</title>
+</head>
+<body>
+<div>
+ <label for="taskName">Task Name:</label>
+ <input type="text" id="taskName" placeholder="Enter task name...">
+</div>
+<button id="startButton">Start</button>
+<button id="pauseButton">Pause</button>
+<button id="logButton">Log Time</button>
+<div id="timerDisplay">00:00:00</div>
+<ul id="logList"></ul>
+<script>
+ let timerInterval;
+ let secondsElapsed = 0;
+ const timerDisplay = document.getElementById('timerDisplay');
+ const logList = document.getElementById('logList');
+ function updateTimerDisplay() {
+ const hours = Math.floor(secondsElapsed / 3600).toString().padStart(2, '0');
+ const minutes = Math.floor((secondsElapsed % 3600) / 60).toString().padStart(2, '0');
+ const seconds = (secondsElapsed % 60).toString().padStart(2, '0');
+ timerDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+ }
+ document.getElementById('startButton').addEventListener('click', () => {
+ if (!timerInterval) {
+ timerInterval = setInterval(() => {
+ secondsElapsed++;
+ updateTimerDisplay();
+ }, 1000);
+ }
+ });
+ document.getElementById('pauseButton').addEventListener('click', () => {
+ clearInterval(timerInterval);
+ timerInterval = null;
+ });
+ document.getElementById('logButton').addEventListener('click', () => {
+ const taskName = document.getElementById('taskName').value || 'Unnamed Task';
+ const li = document.createElement('li');
+ li.textContent = `${taskName} - ${timerDisplay.textContent}`;
+ logList.appendChild(li);
+ // Reset timer
+ clearInterval(timerInterval);
+ timerInterval = null;
+ secondsElapsed = 0;
+ updateTimerDisplay();
+ });
+ updateTimerDisplay(); // Initialize timer display
+</script>
+</body>
+</html>

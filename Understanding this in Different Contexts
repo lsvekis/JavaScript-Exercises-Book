@@ -1,0 +1,16 @@
+// Objective: Explore the behavior of `this` in different scenarios.
+// 1. Define an object with a method that uses `this`.
+const person = {
+ name: "Alex",
+ greet: function() {
+ console.log(`Hello, my name is ${this.name}.`);
+ }
+};
+// 2. Call the method on the person object.
+person.greet(); // Should print: "Hello, my name is Alex."
+// 3. Assign the method to a variable and then call it.
+const greetFunction = person.greet;
+greetFunction(); // Depending on strict mode, this may print: "Hello, my name is ." or throw an error in strict mode because `this` becomes undefined.
+// 4. Use the `call` method to specify `this` for greetFunction.
+greetFunction.call(person); // Should print: "Hello, my name is Alex."
+// Exercise: Experiment with the `apply` and `bind` methods to understand how they can also be used to specify the context of `this`.

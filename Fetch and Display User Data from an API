@@ -1,0 +1,26 @@
+<!-- Objective: Fetch user data from an API and display it. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Fetch User Data</title>
+</head>
+<body>
+<div id="userData"></div>
+<script>
+ async function fetchUserData() {
+ const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+ const userData = await response.json();
+ const userDiv = document.getElementById('userData');
+ userDiv.innerHTML = `
+ <h2>${userData.name}</h2>
+ <p>Email: ${userData.email}</p>
+ <p>Phone: ${userData.phone}</p>
+ <p>Company: ${userData.company.name}</p>
+ <p>Website: <a href="http://${userData.website}">${userData.website}</a></p>
+ `;
+ }
+ fetchUserData();
+</script>
+</body>
+</html>

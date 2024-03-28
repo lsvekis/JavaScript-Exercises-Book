@@ -1,0 +1,14 @@
+// Objective: Learn to use the Map object for storing and retrieving keyed data.
+// 1. Create a new Map.
+const capitals = new Map();
+// 2. Set some key-value pairs in the Map.
+capitals.set('France', 'Paris');
+capitals.set('Germany', 'Berlin');
+capitals.set('Italy', 'Rome');
+// 3. Retrieve and log a value from the Map.
+console.log(`The capital of France is ${capitals.get('France')}.`);
+// 4. Iterate over the Map and log all key-value pairs.
+for (let [country, capital] of capitals) {
+ console.log(`${country}: ${capital}`);
+}
+// Exercise: Experiment with other Map methods like `delete()`, `clear()`, and `has()`. Try using Maps to solve more complex data storage problems.

@@ -1,0 +1,13 @@
+// Objective: Learn to use the Fetch API to make network requests and process responses.
+// 1. Use the Fetch API to request data from a placeholder API.
+fetch('https://jsonplaceholder.typicode.com/posts/1')
+ .then(response => response.json()) // Convert the response to JSON
+ .then(json => {
+ // 2. Print the title of the post to the console.
+ console.log("Post Title: " + json.title);
+ })
+ .catch(error => {
+ // 3. Handle any errors that occur during the fetch operation.
+ console.error("Error fetching data: ", error);
+ });
+// Exercise: Experiment with the Fetch API to make requests to different endpoints and handle various types of responses.

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Shopping Cart</title>
+</head>
+<body>
+<div id="productList">
+ <div class="product">
+ <span class="productName">Product 1</span>
+ <button class="addToCart">Add to Cart</button>
+ </div>
+ <div class="product">
+ <span class="productName">Product 2</span>
+ <button class="addToCart">Add to Cart</button>
+ </div>
+ <!-- More products -->
+</div>
+<div>
+ Cart Items: <span id="cartCount">0</span>
+</div>
+<div id="cartItems"></div>
+<script>
+ const cart = [];
+ const cartCount = document.getElementById('cartCount');
+ const cartItems = document.getElementById('cartItems');
+ document.querySelectorAll('.addToCart').forEach(button => {
+ button.addEventListener('click', function() {
+ const productName = this.previousElementSibling.textContent;
+ cart.push(productName);
+ updateCart();
+ });
+ });
+ function updateCart() {
+ cartCount.textContent = cart.length;
+ // Display cart items
+ cartItems.innerHTML = '';
+ cart.forEach(item => {
+ const li = document.createElement('li');
+ li.textContent = item;
+ cartItems.appendChild(li);
+ });
+ }
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Calculator with History</title>
+    <style>
+        #history {
+            margin-top: 20px;
+        }
+        .history-item {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <input type="text" id="input1">
+        <select id="operation">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" id="input2">
+        <button id="calculate">Calculate</button>
+        <div id="result"></div>
+    </div>
+    <div id="history"></div>
+    <script>
+        const history = [];
+        document.getElementById('calculate').addEventListener('click', function() {
+            const input1 = parseFloat(document.getElementById('input1').value);
+            const input2 = parseFloat(document.getElementById('input2').value);
+            const operation = document.getElementById('operation').value;
+            let result;
+            switch (operation) {
+                case '+':
+                    result = input1 + input2;
+                    break;
+                case '-':
+                    result = input1 - input2;
+                    break;
+                case '*':
+                    result = input1 * input2;
+                    break;
+                case '/':
+                    result = input1 / input2;
+                    break;
+            }
+            document.getElementById('result').textContent = `Result: ${result}`;
+            history.push(`${input1} ${operation} ${input2} = ${result}`);
+            updateHistory();
+        });
+        function updateHistory() {
+            const historyElement = document.getElementById('history');
+            historyElement.innerHTML = ''; // Clear current history
+            history.forEach(function(item) {
+                const div = document.createElement('div');
+                div.textContent = item;
+                div.className = 'history-item'; // Added for styling
+                historyElement.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>

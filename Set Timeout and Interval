@@ -1,0 +1,15 @@
+// Objective: Practice with `setTimeout` and `setInterval` for timing operations.
+// 1. Use `setTimeout` to log a message after 2 seconds.
+setTimeout(() => {
+ console.log("This message appears after 2 seconds.");
+}, 2000);
+// 2. Use `setInterval` to log a message every 3 seconds.
+const intervalId = setInterval(() => {
+ console.log("This message appears every 3 seconds.");
+}, 3000);
+// 3. Use `setTimeout` to cancel the interval after 10 seconds.
+setTimeout(() => {
+ clearInterval(intervalId);
+ console.log("Interval cleared.");
+},10000);
+// Exercise: Experiment with varying the delays and intervals. Try creating a simple timer that counts down every second until it reaches zero, then clears the interval and logs a final message.

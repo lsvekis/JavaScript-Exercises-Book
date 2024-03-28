@@ -1,0 +1,18 @@
+<!-- Objective: Develop an interactive color picker. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Interactive Color Picker</title>
+</head>
+<body>
+<input type="color" id="colorPicker">
+<div id="colorDisplay" style="width: 100px; height: 100px; margin-top: 10px;"></div>
+<script>
+ document.getElementById('colorPicker').addEventListener('input', function() {
+ const color = this.value;
+ document.getElementById('colorDisplay').style.backgroundColor = color;
+ });
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Shopping Cart</title>
+</head>
+<body>
+<div id="productList">
+ <div class="product">
+ <span class="productName">Product 1</span>
+ <button class="addToCart">Add to Cart</button>
+ <button class="removeFromCart">Remove from Cart</button>
+ </div>
+ <div class="product">
+ <span class="productName">Product 2</span>
+ <button class="addToCart">Add to Cart</button>
+ <button class="removeFromCart">Remove from Cart</button>
+ </div>
+ <!-- More products -->
+</div>
+<div>
+ Cart Items: <span id="cartCount">0</span>
+</div>
+<div id="cartItems"></div>
+<script>
+const cart = {};
+const cartCount = document.getElementById('cartCount');
+const cartItems = document.getElementById('cartItems');
+
+document.querySelectorAll('.addToCart').forEach(button => {
+    button.addEventListener('click', function() {
+        const productName = this.previousElementSibling.textContent;
+        if (!cart[productName]) {
+            cart[productName] = 0;
+        }
+        cart[productName]++;
+        updateCart();
+    });
+});
+
+document.querySelectorAll('.removeFromCart').forEach(button => {
+    button.addEventListener('click', function() {
+        const productName = this.parentElement.querySelector('.productName').textContent;
+        if (cart[productName] && cart[productName] > 0) {
+            cart[productName]--;
+            if (cart[productName] === 0) {
+                delete cart[productName]; // Remove item from cart if quantity is 0
+            }
+            updateCart();
+        }
+    });
+});
+
+function updateCart() {
+    let totalCount = 0;
+    cartItems.innerHTML = ''; // Clear current cart display
+    for (const [productName, quantity] of Object.entries(cart)) {
+        totalCount += quantity;
+        const li = document.createElement('li');
+        li.textContent = `${productName}: ${quantity}`;
+        cartItems.appendChild(li);
+    }
+    cartCount.textContent = totalCount;
+}
+
+</script>
+</body>
+</html>

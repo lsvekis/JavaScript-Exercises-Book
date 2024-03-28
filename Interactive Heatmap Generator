@@ -1,0 +1,47 @@
+<!-- Objective: Develop an interactive heatmap generator. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Interactive Heatmap Generator</title>
+ <style>
+ #heatmapCanvas {
+ border: 1px solid #000;
+ }
+ </style>
+</head>
+<body>
+<canvas id="heatmapCanvas" width="600" height="400"></canvas>
+<button id="generateHeatmap">Generate Heatmap</button>
+<script>
+ const canvas = document.getElementById('heatmapCanvas');
+ const ctx = canvas.getContext('2d');
+ const generateButton = document.getElementById('generateHeatmap');
+ // Example data points
+ const dataPoints = [
+ { x: 100, y: 70, value: 70 },
+ { x: 200, y: 100, value: 60 },
+ { x: 300, y: 150, value: 80 },
+ { x: 400, y: 200, value: 90 }
+ // Add more data points as needed
+ ];
+ function drawHeatmap() {
+ // Clear the canvas
+ ctx.clearRect(0, 0, canvas.width, canvas.height);
+ // Draw each data point
+ dataPoints.forEach(point => {
+ const gradient = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, 50);
+ gradient.addColorStop(0, `rgba(255, 0, 0, ${point.value / 100})`);
+ gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+ ctx.fillStyle = gradient;
+ ctx.beginPath();
+ ctx.arc(point.x, point.y, 50, 0, Math.PI * 2);
+ ctx.fill();
+ });
+ }
+ generateButton.addEventListener('click', drawHeatmap);
+ // Optionally, draw heatmap on initial load
+ drawHeatmap();
+</script>
+</body>
+</html>

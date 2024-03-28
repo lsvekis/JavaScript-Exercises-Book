@@ -1,0 +1,49 @@
+<!-- Objective: Develop a countdown timer with start and pause capabilities. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Countdown Timer</title>
+</head>
+<body>
+<div id="timerDisplay">00:00:00</div>
+<button id="startButton">Start</button>
+<button id="pauseButton">Pause</button>
+<script>
+ let countdown;
+ const timerDisplay = document.getElementById('timerDisplay');
+ const startButton = document.getElementById('startButton');
+ const pauseButton = document.getElementById('pauseButton');
+ let isPaused = true;
+ let timeLeft = 10 * 60; // 10 minutes in seconds
+ function updateDisplay(time) {
+ const hours = Math.floor(time / 3600);
+ const minutes = Math.floor((time % 3600) / 60);
+ const seconds = time % 60;
+ timerDisplay.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+ }
+ function startTimer() {
+ if (!isPaused) return; // Prevent multiple intervals
+ isPaused = false;
+ countdown = setInterval(() => {
+ if (timeLeft > 0) {
+ timeLeft--;
+ updateDisplay(timeLeft);
+ } else {
+ clearInterval(countdown);
+ alert("Time's up!");
+ }
+ }, 1000);
+ }
+ function pauseTimer() {
+ if (isPaused) return;
+ clearInterval(countdown);
+ isPaused = true;
+ }
+ startButton.addEventListener('click', startTimer);
+ pauseButton.addEventListener('click', pauseTimer);
+ // Initialize display
+ updateDisplay(timeLeft);
+</script>
+</body>
+</html>

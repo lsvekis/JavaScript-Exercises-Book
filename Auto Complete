@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Text Autocomplete</title>
+    <style>
+        .autocomplete-items {
+            position: relative; /* Changed to relative for the demo */
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+        .autocomplete-item {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+        .autocomplete-item:hover {
+            background-color: #e9e9e9;
+        }
+        /* Additional styling for the input to better visualize in the example */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<input id="autocompleteInput" type="text" name="myCountry" placeholder="Type something...">
+<div id="autocompleteList" class="autocomplete-items"></div>
+
+<script>
+    const suggestions = ["Apple", "Banana", "Cherry", "Date", "Elderberry", "Fig", "Grape", "Honeydew"];
+    
+    document.getElementById('autocompleteInput').addEventListener('input', function(e) {
+        let input = this.value;
+        let autocompleteList = document.getElementById('autocompleteList');
+        autocompleteList.innerHTML = ''; // Clear previous suggestions
+
+        if (!input) return; // No input, no suggestions
+
+        suggestions.forEach(function(suggestion) {
+            if (suggestion.toLowerCase().startsWith(input.toLowerCase())) {
+                let itemDiv = document.createElement('div');
+                itemDiv.classList.add('autocomplete-item');
+                // Highlight the matching part
+                itemDiv.innerHTML = "<strong>" + suggestion.substr(0, input.length) + "</strong>" + suggestion.substr(input.length);
+                itemDiv.addEventListener('click', function() {
+                    document.getElementById('autocompleteInput').value = suggestion; // Fill input with suggestion on click
+                    autocompleteList.innerHTML = ''; // Clear suggestions
+                });
+                autocompleteList.appendChild(itemDiv);
+            }
+        });
+    });
+
+    // Prevent closing on clicking the input field or suggestions
+    document.addEventListener('click', function(e) {
+        if (e.target !== document.getElementById('autocompleteInput') && e.target.className !== 'autocomplete-item') {
+            document.getElementById('autocompleteList').innerHTML = '';
+        }
+    });
+</script>
+
+</body>
+</html>

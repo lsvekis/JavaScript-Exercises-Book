@@ -1,0 +1,38 @@
+<!-- Objective: Create a simple image slider. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Simple Slider</title>
+</head>
+<body>
+<div class="slider">
+    <img id="sliderImage" src="image1.jpg" alt="Slider Image">
+</div>
+<button id="prev">Previous</button>
+<button id="next">Next</button>
+<script>
+    const images = ['image1.jpg', 'image2.jpg', 'image3.jpg']; // Add paths to your images here
+    let currentIndex = 0;
+    function displayImage(index) {
+        const sliderImage = document.getElementById('sliderImage');
+        sliderImage.src = images[index];
+    }
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        displayImage(currentIndex);
+    }
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        displayImage(currentIndex);
+    }
+    document.getElementById('next').addEventListener('click', nextImage);
+    document.getElementById('prev').addEventListener('click', prevImage);
+    // Optional: Implement auto-slide feature
+    let autoSlide = setInterval(nextImage, 3000); // Change image every 3 seconds
+    // Optional: Stop auto-slide on user interaction
+    document.getElementById('next').addEventListener('click', () => clearInterval(autoSlide));
+    document.getElementById('prev').addEventListener('click', () => clearInterval(autoSlide));
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!-- Objective: Learn to manipulate the DOM by adding elements dynamically. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>DOM Manipulation Example</title>
+</head>
+<body>
+<div id="content"></div>
+<button id="addButton">Add Item</button>
+<script>
+ // 1. Select the button and content div by their IDs.
+ const button = document.getElementById('addButton');
+ const content = document.getElementById('content');
+ // 2. Add an event listener to the button for the 'click' event.
+ button.addEventListener('click', function() {
+ // 3. Create a new paragraph element and add it to the content div.
+ const newParagraph = document.createElement('p');
+ newParagraph.textContent = "New item added!";
+ content.appendChild(newParagraph);
+ });
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!-- Objective: Develop a dynamic quiz with instant feedback. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Dynamic Quiz</title>
+</head>
+<body>
+<div id="quizContainer">
+ <div id="question">Question will go here</div>
+ <ul id="answers">Answers will be listed here</ul>
+</div>
+<div id="feedback">Your answer is...</div>
+<script>
+ const quizData = [
+ {
+ question: "What is the capital of France?",
+ answers: ["Paris", "Berlin", "Madrid", "Lisbon"],
+ correctAnswer: "Paris"
+ },
+ // Additional questions as needed
+ ];
+ let currentQuestionIndex = 0;
+ function displayQuestion(questionIndex) {
+ const questionObj = quizData[questionIndex];
+ document.getElementById('question').textContent = questionObj.question;
+ const answersUl = document.getElementById('answers');
+ answersUl.innerHTML = ''; // Clear previous answers
+ questionObj.answers.forEach(answer => {
+ const li = document.createElement('li');
+ li.textContent = answer;
+ li.addEventListener('click', () => checkAnswer(answer, questionObj.correctAnswer));
+ answersUl.appendChild(li);
+ });
+ }
+ function checkAnswer(selectedAnswer, correctAnswer) {
+ const feedbackElement = document.getElementById('feedback');
+ if (selectedAnswer === correctAnswer) {
+ feedbackElement.textContent = "Correct!";
+ } else {
+ feedbackElement.textContent = "Wrong, try again!";
+ }
+ }
+ displayQuestion(currentQuestionIndex);
+</script>
+</body>
+</html>

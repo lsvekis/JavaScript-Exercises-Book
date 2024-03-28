@@ -1,0 +1,15 @@
+// Objective: Demonstrate how closures can capture and maintain state.
+// 1. Create a function that generates and returns a counter function.
+function createCounter() {
+ let count = 0;
+ return function() {
+ count += 1;
+ console.log(count);
+ };
+}
+// 2. Create a counter function and increment it a few times.
+const counter = createCounter();
+counter(); // Should print: 1
+counter(); // Should print: 2
+counter(); // Should print: 3
+// Exercise: Create a similar closure that captures more complex state, like an object, and modifies one of its properties.

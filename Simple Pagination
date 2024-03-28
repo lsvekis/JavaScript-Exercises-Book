@@ -1,0 +1,20 @@
+// Objective: Implement simple pagination to navigate through a list of items.
+const items = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
+let currentPage = 1;
+const itemsPerPage = 10;
+function displayItems(page) {
+ const startIndex = (page - 1) * itemsPerPage;
+ const endIndex = startIndex + itemsPerPage;
+ const itemsToDisplay = items.slice(startIndex, endIndex);
+ document.getElementById('itemsList').innerHTML = itemsToDisplay
+ .map(item => `<li>${item}</li>`)
+ .join('');
+}
+function changePage(newPage) {
+ currentPage = newPage;
+ displayItems(currentPage);
+}
+// Initial display
+displayItems(currentPage);
+// Event listeners for pagination controls (e.g., next, previous buttons) would call changePage() as needed.
+// Exercise: Add pagination controls below the list and handle their click events to navigate between pages. Implement boundary checks to disable controls on the first and last pages.

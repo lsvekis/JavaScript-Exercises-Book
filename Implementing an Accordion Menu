@@ -1,0 +1,45 @@
+<!-- Objective: Build an accordion menu for expandable/collapsible content sections. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Accordion Menu</title>
+ <style>
+ .accordion {
+ cursor: pointer;
+ padding: 18px;
+ width: 100%;
+ text-align: left;
+ border: none;
+ outline: none;
+ transition: background-color 0.4s ease;
+ }
+ .panel {
+ padding: 0 18px;
+ background-color: white;
+ display: none;
+ overflow: hidden;
+ }
+ </style>
+</head>
+<body>
+<button class="accordion">Section 1</button>
+<div class="panel">
+ <p>Lorem ipsum...</p>
+</div>
+<button class="accordion">Section 2</button>
+<div class="panel">
+ <p>Lorem ipsum...</p>
+</div>
+<script>
+ const accordions = document.querySelectorAll('.accordion');
+ accordions.forEach(accordion => {
+ accordion.addEventListener('click', function() {
+ this.classList.toggle('active');
+ const panel = this.nextElementSibling;
+ panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+ });
+ });
+</script>
+</body>
+</html>

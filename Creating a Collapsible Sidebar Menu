@@ -1,0 +1,46 @@
+<!-- Objective: Build a collapsible sidebar menu. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Collapsible Sidebar Menu</title>
+ <style>
+ #sidebar {
+ width: 250px;
+ height: 100vh;
+ position: fixed;
+ left: -250px;
+ top: 0;
+ background: #333;
+ color: #fff;
+ transition: left 0.3s ease;
+ }
+ #sidebar.active {
+ left: 0;
+ }
+ #toggleButton {
+ position: fixed;
+ left: 20px;
+ top: 20px;
+ cursor: pointer;
+ }
+ </style>
+</head>
+<body>
+<div id="sidebar">
+ <!-- Menu items -->
+ <a href="#">Home</a>
+ <a href="#">About</a>
+ <a href="#">Services</a>
+ <a href="#">Contact</a>
+</div>
+<button id="toggleButton">Toggle Sidebar</button>
+<script>
+ const toggleButton = document.getElementById('toggleButton');
+ const sidebar = document.getElementById('sidebar');
+ toggleButton.addEventListener('click', () => {
+ sidebar.classList.toggle('active');
+ });
+</script>
+</body>
+</html>

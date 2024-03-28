@@ -1,0 +1,38 @@
+<!-- Objective: Implement dynamic list sorting functionality. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Dynamic List Sorting</title>
+</head>
+<body>
+<select id="sortCriteria">
+ <option value="ascending">A to Z</option>
+ <option value="descending">Z to A</option>
+ <!-- Add more sort criteria as needed -->
+</select>
+<ul id="itemList">
+ <li>Orange</li>
+ <li>Apple</li>
+ <li>Mango</li>
+ <li>Banana</li>
+</ul>
+<script>
+ const sortCriteria = document.getElementById('sortCriteria');
+ const itemList = document.getElementById('itemList');
+ function sortList(criteria) {
+ let itemsArray = Array.from(itemList.getElementsByTagName('li'));
+ itemsArray.sort((a, b) => {
+ const textA = a.textContent.toUpperCase(); // Case-insensitive
+ const textB = b.textContent.toUpperCase(); // Case-insensitive
+ return criteria === 'ascending' ? textA.localeCompare(textB) : textB.localeCompare(textA);
+ });
+ while (itemList.firstChild) {
+ itemList.removeChild(itemList.firstChild);
+ }
+ itemsArray.forEach(item => itemList.appendChild(item));
+ }
+ sortCriteria.addEventListener('change', () => sortList(sortCriteria.value));
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!-- Objective: Develop a dynamic FAQ section. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Dynamic FAQ Section</title>
+ <style>
+ .faq-question {
+ cursor: pointer;
+ padding: 10px;
+ background-color: #f9f9f9;
+ border: 1px solid #ddd;
+ margin-bottom: 5px;
+ }
+ .faq-answer {
+ display: none;
+ padding: 10px;
+ border: 1px solid #ddd;
+ background-color: #fff;
+ }
+ </style>
+</head>
+<body>
+<div class="faq-question">What is Lorem Ipsum?</div>
+<div class="faq-answer">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+<div class="faq-question">Why do we use it?</div>
+<div class="faq-answer">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</div>
+<!-- Additional questions and answers -->
+<script>
+ document.querySelectorAll('.faq-question').forEach(question => {
+ question.addEventListener('click', function() {
+ const answer = this.nextElementSibling;
+ answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+ });
+ });
+</script>
+</body>
+</html>

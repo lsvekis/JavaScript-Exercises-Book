@@ -1,0 +1,38 @@
+<!-- Objective: Create a simple pagination system with page numbers. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Simple Pagination</title>
+</head>
+<body>
+<div id="content"></div>
+<div id="pagination"></div>
+<script>
+ const data = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
+ const itemsPerPage = 10;
+ let currentPage = 1;
+ function displayItems(page) {
+ const start = (page - 1) * itemsPerPage;
+ const end = start + itemsPerPage;
+ const itemsToDisplay = data.slice(start, end);
+ document.getElementById('content').innerHTML = itemsToDisplay.join('<br>');
+ }
+ function setupPagination(totalItems, itemsPerPage) {
+ const pageCount = Math.ceil(totalItems / itemsPerPage);
+ const paginationContainer = document.getElementById('pagination');
+ for (let i = 1; i <= pageCount; i++) {
+ const pageLink = document.createElement('button');
+ pageLink.textContent = i;
+ pageLink.addEventListener('click', () => {
+ currentPage = i;
+ displayItems(currentPage);
+ });
+ paginationContainer.appendChild(pageLink);
+ }
+ }
+ displayItems(currentPage);
+ setupPagination(data.length, itemsPerPage);
+</script>
+</body>
+</html>

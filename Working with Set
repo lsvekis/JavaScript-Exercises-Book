@@ -1,0 +1,10 @@
+// Objective: Learn to work with the Set object to handle unique values.
+// 1. Create a Set and add some values to it.
+const numbersSet = new Set([1, 2, 3, 4, 4, 5]);
+numbersSet.add(6);
+numbersSet.add(3); // Duplicate, won't be added
+// 2. Log the Set to the console.
+console.log(numbersSet);
+// 3. Iterate over the Set using forEach and log each value.
+numbersSet.forEach(value => console.log(value));
+// Exercise: Explore more methods provided by the Set object, such as .delete(value), .has(value), and .clear(). Try converting a Set back into an array.

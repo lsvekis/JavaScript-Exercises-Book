@@ -1,0 +1,38 @@
+<!-- Objective: Create a simple drag and drop interface. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Drag and Drop</title>
+ <style>
+ #dropZone {
+ width: 300px;
+ height: 100px;
+ border: 2px dashed #aaa;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ }
+ </style>
+</head>
+<body>
+<div id="dragItem" draggable="true" style="width: 100px; height: 50px; background-color: #f00;">Drag me!</div>
+<div id="dropZone">Drop here</div>
+<script>
+ const dragItem = document.getElementById('dragItem');
+ const dropZone = document.getElementById('dropZone');
+ dragItem.addEventListener('dragstart', event => {
+ event.dataTransfer.setData('text/plain', dragItem.id);
+ });
+ dropZone.addEventListener('dragover', event => {
+ event.preventDefault(); // Necessary to allow the drop
+ });
+ dropZone.addEventListener('drop', event => {
+ event.preventDefault(); // Prevent default action (open as link for some elements)
+ const id = event.dataTransfer.getData('text');
+ const draggableElement = document.getElementById(id);
+ dropZone.appendChild(draggableElement);
+ });
+</script>
+</body>
+</html>

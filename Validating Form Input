@@ -1,0 +1,30 @@
+<!-- Objective: Create a form with validation for an email input field. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Form Validation</title>
+</head>
+<body>
+<form id="signupForm">
+ Email: <input type="email" id="emailInput" required>
+ <button type="submit">Submit</button>
+ <p id="errorMessage" style="color: red;"></p>
+</form>
+<script>
+ document.getElementById('signupForm').addEventListener('submit', function(event) {
+ event.preventDefault();
+ const emailInput = document.getElementById('emailInput');
+ const errorMessage = document.getElementById('errorMessage');
+ if (emailInput.value === '' || !emailInput.validity.valid) {
+ errorMessage.textContent = 'Please enter a valid email address.';
+ } else {
+ errorMessage.textContent = '';
+ // Proceed with form submission or further processing
+ console.log('Email submitted:', emailInput.value);
+ }
+ });
+</script>
+</body>
+</html>
+// Exercise: Extend the form validation to include other types of inputs, such as a password field that must meet certain criteria (length, contains special characters, etc.).

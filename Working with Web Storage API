@@ -1,0 +1,11 @@
+// Objective: Learn to persist data in the browser using the Web Storage API.
+// 1. Store data in local storage.
+localStorage.setItem('username', 'JohnDoe');
+// 2. Retrieve data from local storage.
+const username = localStorage.getItem('username');
+console.log(username); // JohnDoe
+// 3. Remove data from local storage.
+localStorage.removeItem('username');
+// 4. Clear all local storage.
+localStorage.clear();
+// Exercise: Use session storage to store data that should only persist for the duration of the page session. Compare the behaviors of local storage and session storage.

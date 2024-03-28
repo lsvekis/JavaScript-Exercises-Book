@@ -1,0 +1,58 @@
+<!-- Objective: Develop a dynamic table sorting feature. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Dynamic Table Sorting</title>
+</head>
+<body>
+<table id="sortableTable">
+ <thead>
+ <tr>
+ <th data-type="number">ID</th>
+ <th data-type="text">Name</th>
+ <th data-type="number">Age</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>1</td>
+ <td>Alice</td>
+ <td>30</td>
+ </tr>
+ <tr>
+ <td>2</td>
+ <td>Bob</td>
+ <td>24</td>
+ </tr>
+ <tr>
+ <td>3</td>
+ <td>Charlie</td>
+ <td>29</td>
+ </tr>
+ <!-- More rows as needed -->
+ </tbody>
+</table>
+<script>
+ document.querySelectorAll('#sortableTable th').forEach(header => {
+ header.addEventListener('click', () => {
+ const table = header.parentNode.parentNode.parentNode;
+ const tbody = table.querySelector('tbody');
+ const index = Array.prototype.indexOf.call(header.parentNode.children, header);
+ const type = header.getAttribute('data-type');
+ const rows = Array.from(tbody.querySelectorAll('tr'));
+ const sortedRows = rows.sort((a, b) => {
+ const aValue = a.children[index].textContent;
+ const bValue = b.children[index].textContent;
+ if (type === 'number') {
+ return parseFloat(aValue) - parseFloat(bValue);
+ } else {
+ return aValue.localeCompare(bValue);
+ }
+ });
+ sortedRows.forEach(row => tbody.appendChild(row));
+ });
+ });
+</script>
+</body>
+</html>

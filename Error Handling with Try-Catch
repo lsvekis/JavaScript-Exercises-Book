@@ -1,0 +1,16 @@
+// Objective: Learn to handle errors gracefully using try-catch.
+// 1. Write a function that divides two numbers and throws an error if the divisor is zero.
+function divide(a, b) {
+ if (b === 0) {
+ throw new Error("Divisor cannot be zero.");
+ }
+ return a / b;
+}
+// 2. Use a try-catch block to call the function and handle the error.
+try {
+ const result = divide(10, 0);
+ console.log(result);
+} catch (error) {
+ console.error("Caught an error:", error.message);
+}
+// Exercise: Extend this pattern by incorporating finally blocks to execute code that should run after try-catch, regardless of the outcome.

@@ -1,0 +1,53 @@
+<!-- Objective: Create a dynamic bookmark manager. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Bookmark Manager</title>
+</head>
+<body>
+<input type="text" id="bookmarkInput" placeholder="Add a new bookmark URL...">
+<button id="addBookmark">Add Bookmark</button>
+<ul id="bookmarkList"></ul>
+<script>
+ const bookmarkInput = document.getElementById('bookmarkInput');
+ const addBookmarkButton = document.getElementById('addBookmark');
+ const bookmarkList = document.getElementById('bookmarkList');
+ let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+ function renderBookmarks() {
+ bookmarkList.innerHTML = '';
+ bookmarks.forEach((bookmark, index) => {
+ const li = document.createElement('li');
+ const a = document.createElement('a');
+ a.href = bookmark;
+ a.textContent = bookmark;
+ a.target = '_blank';
+ const removeButton = document.createElement('button');
+ removeButton.textContent = 'Remove';
+ removeButton.onclick = () => {
+ bookmarks.splice(index, 1);
+ updateLocalStorage();
+ renderBookmarks();
+ };
+ li.appendChild(a);
+ li.appendChild(removeButton);
+ bookmarkList.appendChild(li);
+ });
+ }
+ function addBookmark() {
+ const url = bookmarkInput.value;
+ if (url) {
+ bookmarks.push(url);
+ updateLocalStorage();
+ renderBookmarks();
+ bookmarkInput.value = '';
+ }
+ }
+ function updateLocalStorage() {
+ localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+ }
+ addBookmarkButton.addEventListener('click', addBookmark);
+ renderBookmarks();
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!-- Objective: Create a dynamic search filter for a list of items. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Dynamic Search Filter</title>
+</head>
+<body>
+<input type="text" id="searchInput" placeholder="Search...">
+<ul id="itemList">
+ <li>Apple</li>
+ <li>Banana</li>
+ <li>Carrot</li>
+ <li>Date</li>
+ <li>Elderberry</li>
+</ul>
+<script>
+ const searchInput = document.getElementById('searchInput');
+ const itemList = document.getElementById('itemList');
+ const items = itemList.querySelectorAll('li');
+ searchInput.addEventListener('keyup', function() {
+ const searchValue = searchInput.value.toLowerCase();
+ items.forEach(item => {
+ const text = item.textContent.toLowerCase();
+ if (text.includes(searchValue)) {
+ item.style.display = '';
+ } else {
+ item.style.display = 'none';
+ }
+ });
+ });
+</script>
+</body>
+</html>

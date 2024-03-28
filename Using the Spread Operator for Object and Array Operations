@@ -1,0 +1,11 @@
+// Objective: Practice using the spread operator for cloning and merging.
+// 1. Clone an array using the spread operator.
+const originalArray = [1, 2, 3];
+const clonedArray = [...originalArray];
+console.log(clonedArray);
+// 2. Merge two objects into a new object using the spread operator.
+const object1 = { a: 1, b: 2 };
+const object2 = { b: 3, c: 4 };
+const mergedObject = { ...object1, ...object2 };
+console.log(mergedObject);
+// Exercise: Experiment with the spread operator to combine multiple arrays or objects, and observe how it handles duplicate keys or elements.

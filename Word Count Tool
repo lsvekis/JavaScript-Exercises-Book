@@ -1,0 +1,22 @@
+<!-- Objective: Develop a word count tool. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Word Count Tool</title>
+</head>
+<body>
+<textarea id="textInput" placeholder="Type or paste text here..."></textarea>
+<div>Words: <span id="wordCount">0</span></div>
+<div>Characters: <span id="charCount">0</span></div>
+<script>
+ document.getElementById('textInput').addEventListener('input', function() {
+ const text = this.value.trim();
+ const words = text.length > 0 ? text.match(/\w+/g).length : 0;
+ const characters = text.length;
+ document.getElementById('wordCount').textContent = words;
+ document.getElementById('charCount').textContent = characters;
+ });
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!-- Objective: Develop an interactive map that allows users to place markers by clicking. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Interactive Map Marker Placement</title>
+ <style>
+ #map {
+ position: relative;
+ width: 600px;
+ height: 400px;
+ background-color: #eef;
+ border: 1px solid #bbb;
+ }
+ .marker {
+ position: absolute;
+ width: 20px;
+ height: 20px;
+ background-color: red;
+ border-radius: 50%;
+ cursor: pointer;
+ transform: translate(-50%, -50%);
+ }
+ </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+ const map = document.getElementById('map');
+ map.addEventListener('click', function(event) {
+ const x = event.offsetX;
+ const y = event.offsetY;
+ const marker = document.createElement('div');
+ marker.className = 'marker';
+ marker.style.left = x + 'px';
+ marker.style.top = y + 'px';
+ map.appendChild(marker);
+ });
+</script>
+</body>
+</html>

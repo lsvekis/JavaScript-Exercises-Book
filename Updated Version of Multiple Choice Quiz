@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Quiz</title>
+    <style>
+        .answer-button {
+            display: block;
+            margin: 5px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .answer-button:hover {
+            background-color: #e9e9e9;
+        }
+    </style>
+</head>
+<body>
+<div id="quizContainer"></div>
+<div id="feedback"></div>
+<button id="nextQuestion">Next Question</button>
+<div>Score: <span id="score">0</span></div>
+<script >
+ const questions = [
+    { question: "What is the capital of France?", answers: ["Paris", "London", "Berlin", "Madrid"], correct: 0 },
+    { question: "What is 2 + 2?", answers: ["3", "4", "5", "6"], correct: 1 },
+    // Add more questions as needed
+];
+let currentQuestionIndex = 0;
+let score = 0;
+
+const quizContainer = document.getElementById('quizContainer');
+const feedbackContainer = document.getElementById('feedback');
+const nextQuestionButton = document.getElementById('nextQuestion');
+const scoreDisplay = document.getElementById('score');
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+}
+
+function displayQuestion(questionIndex) {
+    quizContainer.innerHTML = ''; // Clear previous question
+    feedbackContainer.textContent = ''; // Clear previous feedback
+
+    const questionObj = questions[questionIndex];
+    const shuffledAnswers = [...questionObj.answers];
+    shuffleArray(shuffledAnswers);
+
+    const questionText = document.createElement('div');
+    questionText.textContent = questionObj.question;
+    quizContainer.appendChild(questionText);
+
+    shuffledAnswers.forEach((answer) => {
+        const answerButton = document.createElement('button');
+        answerButton.textContent = answer;
+        answerButton.className = 'answer-button';
+        answerButton.addEventListener('click', () => {
+            const selectedIndex = questionObj.answers.indexOf(answer);
+            checkAnswer(selectedIndex, questionObj.correct);
+        });
+        quizContainer.appendChild(answerButton);
+    });
+}
+
+function checkAnswer(selectedIndex, correctIndex) {
+    if (selectedIndex === correctIndex) {
+        score++;
+        scoreDisplay.textContent = score;
+        feedbackContainer.textContent = 'Correct!';
+    } else {
+        feedbackContainer.textContent = 'Wrong Answer. Try again!';
+    }
+
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion(currentQuestionIndex);
+    } else {
+        quizContainer.innerHTML = `<div>Quiz Completed! Final Score: ${score} / ${questions.length}</div>`;
+        nextQuestionButton.style.display = 'none'; // Hide the next button
+    }
+}
+
+nextQuestionButton.addEventListener('click', () => {
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion(currentQuestionIndex);
+    }
+});
+
+// Initialize first question
+displayQuestion(currentQuestionIndex);
+
+</script>
+</body>
+</html>

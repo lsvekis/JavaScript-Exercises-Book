@@ -1,0 +1,13 @@
+// Objective: Learn to transform, filter, and accumulate data in arrays.
+// 1. Use `map` to convert all names in the array to uppercase.
+const names = ['Alice', 'Bob', 'Charlie'];
+const upperCaseNames = names.map(name => name.toUpperCase());
+console.log(upperCaseNames);
+// 2. Use `filter` to find all even numbers in the array.
+const numbers = [1, 2, 3, 4, 5, 6];
+const evenNumbers = numbers.filter(number => number % 2 === 0);
+console.log(evenNumbers);
+// 3. Use `reduce` to find the sum of all numbers in the array.
+const sum = numbers.reduce((acc, current) => acc + current, 0);
+console.log(sum);
+// Exercise: Try combining these methods to perform more complex operations, like calculating the average of only the even numbers in an array.

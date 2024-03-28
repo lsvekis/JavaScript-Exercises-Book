@@ -1,0 +1,40 @@
+<!-- Objective: Develop custom controls for a video player. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Custom Video Player</title>
+</head>
+<body>
+<video id="videoPlayer" width="640" height="360" controls>
+ <source src="movie.mp4" type="video/mp4">
+ Your browser does not support the video tag.
+</video>
+<div id="controls">
+ <button id="playPause">Play</button>
+ <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1">
+ <progress id="progressBar" value="0" max="100"></progress>
+</div>
+<script>
+ const video = document.getElementById('videoPlayer');
+ const playPauseButton = document.getElementById('playPause');
+ const volumeControl = document.getElementById('volumeControl');
+ const progressBar = document.getElementById('progressBar');
+ playPauseButton.addEventListener('click', () => {
+ if (video.paused) {
+ video.play();
+ playPauseButton.textContent = 'Pause';
+ } else {
+ video.pause();
+ playPauseButton.textContent = 'Play';
+ }
+ });
+ volumeControl.addEventListener('input', () => {
+ video.volume = volumeControl.value;
+ });
+ video.addEventListener('timeupdate', () => {
+ progressBar.value = (video.currentTime / video.duration) * 100;
+ });
+</script>
+</body>
+</html>

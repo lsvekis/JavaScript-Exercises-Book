@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Load Content on Scroll</title>
+<style>
+  /* Basic styling for content items */
+  #content div {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px;
+    background-color: #f9f9f9;
+  }
+  /* Style the content area */
+  #content {
+    margin: 20px;
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div id="content">
+  <!-- Content will be loaded here -->
+</div>
+
+<script>
+// Your JavaScript code goes here
+document.addEventListener('DOMContentLoaded', function() {
+  const contentArea = document.getElementById('content');
+  let contentLoaded = 0;
+  function loadMoreContent() {
+    for (let i = 0; i < 5; i++) { // Load 5 items at a time
+      const div = document.createElement('div');
+      div.textContent = `Item ${contentLoaded + 1}`;
+      contentArea.appendChild(div);
+      contentLoaded++;
+    }
+  }
+  window.addEventListener('scroll', function() {
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+      loadMoreContent();
+    }
+  });
+  // Initially load some content
+  loadMoreContent();
+});
+</script>
+
+</body>
+</html>

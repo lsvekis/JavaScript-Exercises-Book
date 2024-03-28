@@ -1,0 +1,39 @@
+<!-- Objective: Create a simple image gallery where clicking a thumbnail displays a larger version of the image. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Image Gallery</title>
+</head>
+<body>
+<div id="imageGallery">
+ <!-- Thumbnails will be generated dynamically -->
+</div>
+<img id="mainImage" src="" alt="Main display" style="width: 500px; height: auto;">
+<script>
+ const images = [
+ "path/to/image1.jpg",
+ "path/to/image2.jpg",
+ "path/to/image3.jpg"
+ // Add paths to more images
+ ];
+ const gallery = document.getElementById("imageGallery");
+ const mainImage = document.getElementById("mainImage");
+ images.forEach(imageSrc => {
+ const img = document.createElement("img");
+ img.src = imageSrc;
+ img.style.width = "100px";
+ img.style.height = "auto";
+img.addEventListener("click", () => {
+ mainImage.src = imageSrc;
+ });
+ gallery.appendChild(img);
+});
+// Set the src of mainImage to the first image in the array by default
+if (images.length > 0) {
+ mainImage.src = images[0];
+}
+</script>
+</body>
+</html>
+// Exercise: Enhance the gallery with additional features, such as arrows to navigate back and forth between the images, and a caption for each image that updates dynamically when the image is clicked. Consider adding animations or transitions for a smoother viewing experience.

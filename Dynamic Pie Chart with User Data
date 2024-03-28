@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Pie Chart with User Data</title>
+    <style>
+        #pie-chart-container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+        }
+        .pie-slice {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: url(#clipCircle);
+            transform-origin: 50% 50%;
+        }
+        #user-input {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="pie-chart-container">
+        <svg id="pie-chart" viewBox="-1 -1 2 2">
+            <defs>
+                <clipPath id="clipCircle">
+                    <circle cx="0" cy="0" r="1" />
+                </clipPath>
+            </defs>
+        </svg>
+    </div>
+    <div id="user-input">
+        <label for="data-value">Data Value:</label>
+        <input type="number" id="data-value">
+        <label for="data-label">Data Label:</label>
+        <input type="text" id="data-label">
+        <button onclick="addData()">Add Data</button>
+    </div>
+    <script>
+        let data = [];
+        let colors = ['#f00', '#0f0', '#00f', '#ff0', '#0ff']; // Predefined colors for pie slices
+        let total = 0;
+        function addData() {
+            const valueInput = document.getElementById('data-value');
+            const labelInput = document.getElementById('data-label');
+            const value = parseFloat(valueInput.value);
+            const label = labelInput.value.trim();
+            if (!isNaN(value) && label !== '') {
+                data.push({ value, label });
+                total += value;
+                drawPieChart();
+                valueInput.value = '';
+                labelInput.value = '';
+            } else {
+                alert('Please enter valid data value and label.');
+            }
+        }
+        function drawPieChart() {
+            const pieChart = document.getElementById('pie-chart');
+            pieChart.innerHTML = ''; // Clear previous chart
+            let startAngle = 0;
+            data.forEach((item, index) => {
+                const sliceAngle = (item.value / total) * 360;
+                const endAngle = startAngle + sliceAngle;
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                const d = describeArc(0, 0, 1, startAngle, endAngle);
+                path.setAttributeNS(null, 'd', d);
+                path.setAttributeNS(null, 'fill', colors[index % colors.length]);
+                path.setAttributeNS(null, 'class', 'pie-slice');
+                pieChart.appendChild(path);
+                startAngle = endAngle;
+            });
+        }
+        // Function to generate SVG path for a pie slice
+        function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+            const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+            return {
+                x: centerX + (radius * Math.cos(angleInRadians)),
+                y: centerY + (radius * Math.sin(angleInRadians))
+            };
+        }
+        function describeArc(x, y, radius, startAngle, endAngle) {
+            const start = polarToCartesian(x, y, radius, endAngle);
+            const end = polarToCartesian(x, y, radius, startAngle);
+            const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+            const d = [
+                'M', start.x, start.y,
+                'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y,
+                'L', x, y,
+                'Z'
+            ].join(' ');
+            return d;
+        }
+    </script>
+</body>
+</html>

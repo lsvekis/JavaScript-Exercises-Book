@@ -1,0 +1,55 @@
+<!-- Objective: Create a collapsible section that users can expand or collapse. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+<title>Collapsible Section</title>
+<style>
+ .collapsible {
+ background-color: #777;
+ color: white;
+ cursor: pointer;
+ padding: 18px;
+ width: 100%;
+ border: none;
+ text-align: left;
+ outline: none;
+ font-size: 15px;
+ }
+ .active, .collapsible:hover {
+ background-color: #555;
+ }
+ .content {
+ padding: 0 18px;
+ display: none;
+ overflow: hidden;
+ background-color: #f1f1f1;
+ transition: max-height 0.2s ease-out;
+ }
+</style>
+</head>
+<body>
+<button class="collapsible">Open Section 1</button>
+<div class="content">
+    <p>This is the content of section 1.</p>
+</div>
+<button class="collapsible">Open Section 2</button>
+<div class="content">
+    <p>This is the content of section 2.</p>
+</div>
+<script>
+    const collapsibles = document.querySelectorAll(".collapsible");
+    collapsibles.forEach(collapsible => {
+        collapsible.addEventListener("click", function() {
+            this.classList.toggle("active");
+            const content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    });
+</script>
+</body>
+</html>

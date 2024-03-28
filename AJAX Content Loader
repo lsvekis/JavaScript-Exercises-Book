@@ -1,0 +1,22 @@
+<!-- Objective: Implement an AJAX content loader. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>AJAX Content Loader</title>
+</head>
+<body>
+<div id="contentArea">Click the button to load content!</div>
+<button id="loadContentBtn">Load Content</button>
+<script>
+ document.getElementById('loadContentBtn').addEventListener('click', function() {
+ fetch('example.txt')
+ .then(response => response.text())
+ .then(data => {
+ document.getElementById('contentArea').textContent = data;
+ })
+ .catch(error => console.error('Error loading the content:', error));
+ });
+</script>
+</body>
+</html>

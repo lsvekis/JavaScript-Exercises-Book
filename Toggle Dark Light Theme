@@ -1,0 +1,38 @@
+<!-- Objective: Create a toggle for switching between dark and light themes. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Theme Toggle</title>
+ <style>
+ :root {
+ --bg-color: #fff;
+ --text-color: #000;
+ }
+ body.dark-mode {
+ --bg-color: #333;
+ --text-color: #fff;
+ }
+ body {
+ background-color: var(--bg-color);
+ color: var(--text-color);
+ transition: background-color 0.5s ease, color 0.5s ease;
+ }
+ </style>
+</head>
+<body>
+<button id="themeToggle">Toggle Theme</button>
+<script>
+ const themeToggle = document.getElementById('themeToggle');
+ function toggleTheme() {
+ document.body.classList.toggle('dark-mode');
+ localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+ }
+ // Check for saved user preference, if any, on initial load
+ if (localStorage.getItem('theme') === 'dark') {
+ document.body.classList.add('dark-mode');
+ }
+ themeToggle.addEventListener('click', toggleTheme);
+</script>
+</body>
+</html>

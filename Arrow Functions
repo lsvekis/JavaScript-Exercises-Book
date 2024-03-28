@@ -1,0 +1,11 @@
+// Objective: Understand and apply arrow functions for concise syntax.
+// 1. Define a traditional function that takes a number and returns its square.
+function square(number) {
+ return number * number;
+}
+// 2. Rewrite the above function as an arrow function.
+let squareArrow = number => number * number;
+// 3. Call both functions with the same argument and print their outputs to verify they are the same.
+console.log(square(5)); // Traditional function
+console.log(squareArrow(5)); // Arrow function
+// Exercise: Convert more traditional functions to arrow functions and explore their usage with higher-order functions like map, filter, and reduce.

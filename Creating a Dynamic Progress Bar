@@ -1,0 +1,42 @@
+<!-- Objective: Develop a dynamic progress bar. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Dynamic Progress Bar</title>
+ <style>
+ #progressContainer {
+ width: 100%;
+ background-color: #ddd;
+ }
+ #progressBar {
+ width: 1%;
+ height: 30px;
+ background-color: #4CAF50;
+ }
+ </style>
+</head>
+<body>
+<div id="progressContainer">
+ <div id="progressBar"></div>
+</div>
+<button id="increaseProgress">Increase Progress</button>
+<button id="resetProgress">Reset</button>
+<script>
+ const increaseButton = document.getElementById('increaseProgress');
+ const resetButton = document.getElementById('resetProgress');
+ const progressBar = document.getElementById('progressBar');
+ let progress = 0;
+ increaseButton.addEventListener('click', () => {
+ if (progress < 100) {
+ progress += 10; // Increase progress
+ progressBar.style.width = progress + '%';
+ }
+ });
+ resetButton.addEventListener('click', () => {
+ progress = 0; // Reset progress
+ progressBar.style.width = progress + '%';
+ });
+</script>
+</body>
+</html>

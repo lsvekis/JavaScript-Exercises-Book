@@ -1,0 +1,13 @@
+// Objective: Use template literals to create dynamic HTML content.
+// 1. Create a template literal that represents an HTML fragment with dynamic values.
+const userName = "Alex";
+const userStatus = "online";
+const userProfile = `
+ <div class="user-profile">
+ <h2>${userName}</h2>
+ <p>Status: <span class="${userStatus}">${userStatus}</span></p>
+ </div>
+`;
+// 2. Insert the HTML fragment into the DOM.
+document.body.innerHTML += userProfile;
+// Exercise: Extend this by creating a function that takes user data as arguments and returns an HTML fragment representing the user profile. Use this function to add multiple user profiles to the page.

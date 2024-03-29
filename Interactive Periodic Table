@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Periodic Table</title>
+    <style>
+        .element {
+            border: 1px solid black;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            float: left;
+            margin: 2px;
+            cursor: pointer;
+        }
+        .element:hover {
+            background-color: lightgray;
+        }
+        #info {
+            clear: both;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="periodic-table">
+    <!-- Element Blocks will be dynamically added here -->
+</div>
+<div id="info">
+    <!-- Detailed Information will be displayed here -->
+</div>
+<script>
+    // Sample element data for demonstration
+    const elements = [
+        { symbol: "H", name: "Hydrogen", atomic_number: 1, atomic_mass: 1.008 },
+        { symbol: "He", name: "Helium", atomic_number: 2, atomic_mass: 4.0026 },
+        // Add more elements here
+    ];
+    // Function to generate HTML for element blocks
+    function createElementBlock(element) {
+        return `<div class="element" data-symbol="${element.symbol}" 
+                    data-name="${element.name}" 
+                    data-atomic_number="${element.atomic_number}" 
+                    data-atomic_mass="${element.atomic_mass}">
+                    ${element.symbol}
+                </div>`;
+    }
+    // Function to display detailed information about an element
+    function showElementInfo(element) {
+        const infoDiv = document.getElementById('info');
+        infoDiv.innerHTML = `
+            <h2>${element.name} (${element.symbol})</h2>
+            <p>Atomic Number: ${element.atomic_number}</p>
+            <p>Atomic Mass: ${element.atomic_mass}</p>
+        `;
+    }
+    // Generate element blocks and append them to the periodic table
+    const periodicTable = document.getElementById('periodic-table');
+    elements.forEach(element => {
+        const elementBlock = createElementBlock(element);
+        periodicTable.innerHTML += elementBlock;
+    });
+    // Event listener for element blocks
+    const elementBlocks = document.querySelectorAll('.element');
+    elementBlocks.forEach(element => {
+        element.addEventListener('click', function () {
+            const symbol = this.getAttribute('data-symbol');
+            const name = this.getAttribute('data-name');
+            const atomic_number = this.getAttribute('data-atomic_number');
+            const atomic_mass = this.getAttribute('data-atomic_mass');
+            const clickedElement = { symbol, name, atomic_number, atomic_mass };
+            showElementInfo(clickedElement);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Habit Tracker</title>
+    <style>
+        .completed { color: green; }
+    </style>
+</head>
+<body>
+    <h2>Track a New Habit</h2>
+    <form id="habitForm">
+        <input type="text" id="habitName" placeholder="Habit Name" required>
+        <input type="number" id="goal" placeholder="Daily Goal (in minutes, pages, etc.)" required>
+        <button type="submit">Start Tracking</button>
+    </form>
+    <div id="habitList">
+        <!-- Tracked habits will be listed here -->
+    </div>
+    <script>
+        let habits = JSON.parse(localStorage.getItem('habits')) || [];
+        document.getElementById('habitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const habitName = document.getElementById('habitName').value.trim();
+            const goal = parseInt(document.getElementById('goal').value, 10);
+            habits.push({ habitName, goal, progress: 0 });
+            localStorage.setItem('habits', JSON.stringify(habits));
+            displayHabits();
+            this.reset();
+        });
+
+        function updateProgress(index) {
+            habits[index].progress++;
+            localStorage.setItem('habits', JSON.stringify(habits));
+            displayHabits();
+        }
+
+        function displayHabits() {
+            const list = document.getElementById('habitList');
+            list.innerHTML = ''; // Clear the list
+            habits.forEach((habit, index) => {
+                const habitDiv = document.createElement('div');
+                habitDiv.innerHTML = `<div>Habit: ${habit.habitName}, Goal: ${habit.goal}, Progress: ${habit.progress}</div>`;
+                const progressButton = document.createElement('button');
+                progressButton.textContent = 'Mark Progress';
+                progressButton.addEventListener('click', () => updateProgress(index));
+
+                habitDiv.appendChild(progressButton);
+
+                if (habit.progress >= habit.goal) {
+                    habitDiv.classList.add('completed');
+                    habitDiv.innerHTML += ` <span>Goal Reached!</span>`;
+                }
+
+                list.appendChild(habitDiv);
+            });
+        }
+
+        displayHabits();
+    </script>
+</body>
+</html>

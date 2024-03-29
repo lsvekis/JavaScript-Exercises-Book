@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Custom Recipe Creator</title>
+</head>
+<body>
+<h2>Create a Recipe</h2>
+<form id="recipeForm">
+ <input type="text" id="recipeTitle" placeholder="Recipe Title" required>
+ <textarea id="recipeIngredients" placeholder="Ingredients (one per line)" required></textarea>
+ <textarea id="recipeInstructions" placeholder="Instructions" required></textarea>
+ <input type="file" id="recipeImage" accept="image/*">
+ <button type="submit">Save Recipe</button>
+</form>
+<div id="recipeContainer">
+ <!-- Recipes will be displayed here -->
+</div>
+<script>
+ document.getElementById('recipeForm').addEventListener('submit', function(e) {
+ e.preventDefault();
+ const title = document.getElementById('recipeTitle').value.trim();
+ const ingredients = document.getElementById('recipeIngredients').value.trim().split('\n');
+ const instructions = document.getElementById('recipeInstructions').value.trim();
+ // Handle image file
+ const imageFile = document.getElementById('recipeImage').files[0];
+ // Assuming a function to handle recipe saving
+ saveRecipe({ title, ingredients, instructions, imageFile });
+ // Function to display saved recipes
+ displayRecipes();
+ });
+ function saveRecipe(recipeData) {
+ // Implementation for saving recipe data, possibly to local storage or a backend service
+ }
+ function displayRecipes() {
+ // Implementation for displaying saved recipes in the recipeContainer
+ }
+ // Initial display of recipes
+ displayRecipes();
+</script>
+</body>
+</html>

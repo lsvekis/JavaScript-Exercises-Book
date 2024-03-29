@@ -1,0 +1,36 @@
+<!-- Objective: Create an interactive flashcard learning tool. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Flashcard Learning Tool</title>
+</head>
+<body>
+<div id="flashcardContainer"></div>
+<button id="addFlashcardBtn">Add Flashcard</button>
+<button id="nextFlashcardBtn">Next</button>
+<script>
+ let flashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+ let currentIndex = 0;
+ function displayFlashcard(index) {
+ const flashcard = flashcards[index];
+ const container = document.getElementById('flashcardContainer');
+ container.innerHTML = `<div>${flashcard.question}</div><div>${flashcard.answer}</div>`;
+ }
+ document.getElementById('addFlashcardBtn').addEventListener('click', () => {
+ const question = prompt("Enter the flashcard question:");
+ const answer = prompt("Enter the flashcard answer:");
+ flashcards.push({ question, answer });
+ localStorage.setItem('flashcards', JSON.stringify(flashcards));
+ displayFlashcard(flashcards.length - 1);
+ });
+ document.getElementById('nextFlashcardBtn').addEventListener('click', () => {
+ currentIndex = (currentIndex + 1) % flashcards.length;
+ displayFlashcard(currentIndex);
+ });
+ if (flashcards.length > 0) {
+ displayFlashcard(0);
+ }
+</script>
+</body>
+</html>

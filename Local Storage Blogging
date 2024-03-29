@@ -1,0 +1,77 @@
+<!-- Objective: Develop a simple blogging platform. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Simple Blogging Platform</title>
+<style>
+ .post { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; }
+ .comment { margin-left: 20px; padding: 5px; border-left: 1px solid #ccc; }
+ </style>
+</head>
+<body>
+<h2>Create Post</h2>
+<form id="postForm">
+ <input type="text" id="postTitle" placeholder="Title" required>
+ <textarea id="postContent" placeholder="Content" required></textarea>
+ <button type="submit">Post</button>
+</form>
+<div id="postsContainer"></div>
+<script>
+// Mock implementation of createPost and fetchPosts using localStorage
+function createPost({ title, content }) {
+    return new Promise((resolve) => {
+        // Retrieve existing posts from localStorage
+        const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+        // Add new post
+        const newPost = { title, content, comments: [] }; // Adding an empty comments array
+        posts.push(newPost);
+        // Save updated posts back to localStorage
+        localStorage.setItem('posts', JSON.stringify(posts));
+        resolve();
+    });
+}
+
+function fetchPosts() {
+    return new Promise((resolve) => {
+        // Retrieve posts from localStorage
+        const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+        resolve(posts);
+    });
+}
+document.getElementById('postForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const title = document.getElementById('postTitle').value.trim();
+    const content = document.getElementById('postContent').value.trim();
+    createPost({ title, content }).then(refreshPosts);
+    // Clear form fields
+    document.getElementById('postTitle').value = '';
+    document.getElementById('postContent').value = '';
+});
+
+function displayPosts(posts) {
+    const postsContainer = document.getElementById('postsContainer');
+    postsContainer.innerHTML = ''; // Clear existing posts
+    posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
+        postElement.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
+        // Display comments, assuming post.comments exists
+        post.comments.forEach(comment => {
+            const commentElement = document.createElement('div');
+            commentElement.className = 'comment';
+            commentElement.textContent = comment;
+            postElement.appendChild(commentElement);
+        });
+        postsContainer.appendChild(postElement);
+    });
+}
+
+function refreshPosts() {
+    fetchPosts().then(displayPosts);
+}
+// Initial posts load
+refreshPosts();
+</script>
+</body>
+</html>

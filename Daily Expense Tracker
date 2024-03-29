@@ -1,0 +1,47 @@
+<!-- Objective: Build a daily expense tracker. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Daily Expense Tracker</title>
+</head>
+<body>
+<h2>Add Expense</h2>
+<form id="expenseForm">
+ <input type="text" id="expenseName" placeholder="Expense Name" required>
+ <input type="number" id="expenseAmount" placeholder="Amount" required>
+ <select id="expenseCategory">
+ <option value="food">Food</option>
+ <option value="transport">Transport</option>
+ <option value="housing">Housing</option>
+ <!-- Add more categories as needed -->
+ </select>
+ <button type="submit">Add Expense</button>
+</form>
+<h2>Expenses List</h2>
+<ul id="expensesList"></ul>
+<script>
+ const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+ document.getElementById('expenseForm').addEventListener('submit', function(e) {
+ e.preventDefault();
+ const name = document.getElementById('expenseName').value.trim();
+ const amount = document.getElementById('expenseAmount').value;
+ const category = document.getElementById('expenseCategory').value;
+ expenses.push({ name, amount, category });
+ localStorage.setItem('expenses', JSON.stringify(expenses));
+ updateExpensesList();
+ this.reset(); // Reset form fields
+ });
+ function updateExpensesList() {
+ const listElement = document.getElementById('expensesList');
+ listElement.innerHTML = ''; // Clear current list
+ expenses.forEach(expense => {
+ const listItem = document.createElement('li');
+ listItem.textContent = `${expense.name} - $${expense.amount} [${expense.category}]`;
+ listElement.appendChild(listItem);
+ });
+ }
+ updateExpensesList(); // Initial list update
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!-- Objective: Create a custom color palette generator. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Color Palette Generator</title>
+</head>
+<body>
+<div id="paletteContainer"></div>
+<button id="generatePalette">Generate Palette</button>
+<button id="exportPalette">Export Palette</button>
+<script>
+ const paletteContainer = document.getElementById('paletteContainer');
+ function generateColor() {
+ return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+ }
+ function displayPalette(colors) {
+ paletteContainer.innerHTML = '';
+ colors.forEach(color => {
+ const colorDiv = document.createElement('div');
+ colorDiv.style.backgroundColor = color;
+ colorDiv.style.width = '100px';
+ colorDiv.style.height = '100px';
+ colorDiv.style.display = 'inline-block';
+ paletteContainer.appendChild(colorDiv);
+ });
+ }
+ document.getElementById('generatePalette').addEventListener('click', () => {
+ const colors = Array.from({ length: 5 }, generateColor);
+ displayPalette(colors);
+ });
+ // Add functionality to export the palette
+ document.getElementById('exportPalette').addEventListener('click', () => {
+ // Example: Convert the palette to an image or a downloadable file
+ });
+</script>
+</body>
+</html>

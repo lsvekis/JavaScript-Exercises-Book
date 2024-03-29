@@ -1,0 +1,47 @@
+<!-- Objective: Build a simple task timer. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Simple Task Timer</title>
+</head>
+<body>
+<h2>Task Timer</h2>
+<div id="timerDisplay">00:00:00</div>
+<button id="startButton">Start</button>
+<button id="pauseButton">Pause</button>
+<button id="resetButton">Reset</button>
+<script>
+ let timer = 0;
+ let interval;
+ const timerDisplay = document.getElementById('timerDisplay');
+ function updateDisplay() {
+ const hours = Math.floor(timer / 3600).toString().padStart(2, '0');
+ const minutes = Math.floor((timer % 3600) / 60).toString().padStart(2, '0');
+ const seconds = (timer % 60).toString().padStart(2, '0');
+ timerDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+ }
+ document.getElementById('startButton').addEventListener('click', () => {
+ if (!interval) {
+ interval = setInterval(() => {
+ timer++;
+ updateDisplay();
+ }, 1000);
+ }
+ });
+ document.getElementById('pauseButton').addEventListener('click', () => {
+ if (interval) {
+ clearInterval(interval);
+ interval = null;
+ }
+ });
+ document.getElementById('resetButton').addEventListener('click', () => {
+ clearInterval(interval);
+ interval = null;
+ timer = 0;
+ updateDisplay();
+ });
+ updateDisplay(); // Initialize display
+</script>
+</body>
+</html>

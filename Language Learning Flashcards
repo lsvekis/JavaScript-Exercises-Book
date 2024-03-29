@@ -1,0 +1,39 @@
+<!-- Objective: Develop a language learning flashcard tool. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Language Learning Flashcards</title>
+</head>
+<body>
+<h2>Add New Flashcard</h2>
+<form id="flashcardForm">
+ <input type="text" id="word" placeholder="Word in Target Language" required>
+ <input type="text" id="translation" placeholder="Translation or Definition" required>
+ <button type="submit">Add Flashcard</button>
+</form>
+<div id="flashcardsContainer"></div>
+<script>
+ let flashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+ document.getElementById('flashcardForm').addEventListener('submit', function(e) {
+ e.preventDefault();
+ const word = document.getElementById('word').value.trim();
+ const translation = document.getElementById('translation').value.trim();
+ flashcards.push({ word, translation });
+ localStorage.setItem('flashcards', JSON.stringify(flashcards));
+ displayFlashcards();
+ this.reset();
+ });
+ function displayFlashcards() {
+ const container = document.getElementById('flashcardsContainer');
+ container.innerHTML = ''; // Clear existing flashcards
+ flashcards.forEach(flashcard => {
+ const flashcardDiv = document.createElement('div');
+ flashcardDiv.innerHTML = `<div>Word: ${flashcard.word}</div><div>Translation: ${flashcard.translation}</div>`;
+ container.appendChild(flashcardDiv);
+ });
+ }
+ displayFlashcards();
+</script>
+</body>
+</html>

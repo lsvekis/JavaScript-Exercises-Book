@@ -1,0 +1,41 @@
+<!-- Objective: Develop a customizable countdown timer. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Customizable Countdown Timer</title>
+</head>
+<body>
+<div>
+ <label for="timerDuration">Set Timer (seconds):</label>
+ <input type="number" id="timerDuration" min="1" placeholder="Enter duration...">
+ <button id="startTimer">Start Timer</button>
+</div>
+<div id="timerDisplay">00:00:00</div>
+<script>
+ let countdown;
+ const timerDisplay = document.getElementById('timerDisplay');
+ function updateTimerDisplay(seconds) {
+ const hours = Math.floor(seconds / 3600);
+ const minutes = Math.floor((seconds % 3600) / 60);
+ const secs = seconds % 60;
+ timerDisplay.textContent = 
+ `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+ }
+ document.getElementById('startTimer').addEventListener('click', () => {
+ const duration = parseInt(document.getElementById('timerDuration').value);
+ let secondsRemaining = duration;
+ updateTimerDisplay(secondsRemaining);
+ clearInterval(countdown); // Clear existing timer if running
+ countdown = setInterval(() => {
+ secondsRemaining--;
+ updateTimerDisplay(secondsRemaining);
+ if (secondsRemaining <= 0) {
+ clearInterval(countdown);
+ alert('Time is up!');
+ }
+ }, 1000);
+ });
+</script>
+</body>
+</html>

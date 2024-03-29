@@ -1,0 +1,22 @@
+<!-- Objective: Develop a bookmarklet creation tool. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Bookmarklet Creator</title>
+</head>
+<body>
+<textarea id="jsCode" placeholder="Enter JavaScript code here..."></textarea>
+<button id="generateBookmarklet">Generate Bookmarklet</button>
+<div id="bookmarkletResult">Your bookmarklet will appear here.</div>
+<script>
+ document.getElementById('generateBookmarklet').addEventListener('click', () => {
+ const jsCode = document.getElementById('jsCode').value.trim();
+ const encodedJs = encodeURIComponent(jsCode);
+ const bookmarkletLink = `javascript:(function(){${encodedJs}})();`;
+ const resultDiv = document.getElementById('bookmarkletResult');
+ resultDiv.innerHTML = `<a href="${bookmarkletLink}" target="_blank">Drag this to your bookmarks bar</a>`;
+ });
+</script>
+</body>
+</html>

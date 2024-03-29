@@ -1,0 +1,36 @@
+<!-- Objective: Develop a dynamic form field generator. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Dynamic Form Field Generator</title>
+</head>
+<body>
+<div id="formContainer">
+ <form id="dynamicForm">
+ <button type="button" id="addFieldBtn">Add Field</button>
+ <button type="submit">Submit</button>
+ </form>
+</div>
+<script>
+ document.getElementById('addFieldBtn').addEventListener('click', () => {
+ const newField = document.createElement('input');
+ newField.setAttribute('type', 'text');
+ newField.setAttribute('placeholder', 'New Field');
+ document.getElementById('dynamicForm').insertBefore(newField, document.getElementById('addFieldBtn'));
+ });
+ document.getElementById('dynamicForm').addEventListener('submit', (e) => {
+ e.preventDefault();
+ const formData = new FormData(e.target);
+ const formObject = {};
+ formData.forEach((value, key) => {
+ if (!formObject[key]) {
+ formObject[key] = value;
+ }
+ });
+ console.log(formObject);
+ // Handle form data as needed
+ });
+</script>
+</body>
+</html>

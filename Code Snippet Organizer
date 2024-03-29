@@ -1,0 +1,46 @@
+<!-- Objective: Build a code snippet organizer. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Code Snippet Organizer</title>
+</head>
+<body>
+<h2>Add New Snippet</h2>
+<form id="snippetForm">
+ <input type="text" id="snippetTitle" placeholder="Title" required>
+ <textarea id="snippetCode" placeholder="Code" required></textarea>
+ <select id="snippetLanguage">
+ <option value="javascript">JavaScript</option>
+ <option value="python">Python</option>
+ <option value="html">HTML</option>
+ <!-- More languages as needed -->
+ </select>
+ <button type="submit">Save Snippet</button>
+</form>
+<div id="snippetsContainer"></div>
+<script>
+ let snippets = JSON.parse(localStorage.getItem('snippets')) || [];
+ document.getElementById('snippetForm').addEventListener('submit', function(e) {
+ e.preventDefault();
+ const title = document.getElementById('snippetTitle').value.trim();
+ const code = document.getElementById('snippetCode').value;
+ const language = document.getElementById('snippetLanguage').value;
+ snippets.push({ title, code, language });
+ localStorage.setItem('snippets', JSON.stringify(snippets));
+ displaySnippets();
+ this.reset();
+ });
+ function displaySnippets() {
+ const container = document.getElementById('snippetsContainer');
+ container.innerHTML = '';
+ snippets.forEach(snippet => {
+ const snippetDiv = document.createElement('div');
+ snippetDiv.innerHTML = `<h3>${snippet.title}</h3><pre><code>${snippet.code}</code></pre><p>Language: ${snippet.language}</p>`;
+ container.appendChild(snippetDiv);
+ });
+ }
+ displaySnippets();
+</script>
+</body>
+</html>

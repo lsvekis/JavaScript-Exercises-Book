@@ -1,0 +1,40 @@
+<!-- Objective: Build a drag-and-drop list organizer. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Drag-and-Drop List Organizer</title>
+</head>
+<body>
+<ul id="draggableList">
+ <li draggable="true">Item 1</li>
+ <li draggable="true">Item 2</li>
+ <li draggable="true">Item 3</li>
+ <!-- More list items as needed -->
+</ul>
+<script>
+ const listItems = document.querySelectorAll('#draggableList li');
+ let draggedItem = null;
+ listItems.forEach(item => {
+ item.addEventListener('dragstart', function() {
+ draggedItem = this;
+ });
+ item.addEventListener('dragover', function(e) {
+ e.preventDefault(); // Necessary to allow dropping
+ });
+ item.addEventListener('drop', function() {
+ if (this !== draggedItem) {
+ let allItems = document.querySelectorAll('#draggableList li');
+ let draggedIndex = Array.from(allItems).indexOf(draggedItem);
+ let thisIndex = Array.from(allItems).indexOf(this);
+ if (draggedIndex < thisIndex) {
+ this.parentNode.insertBefore(draggedItem, this.nextSibling);
+ } else {
+ this.parentNode.insertBefore(draggedItem, this);
+ }
+ }
+ });
+ });
+</script>
+</body>
+</html>

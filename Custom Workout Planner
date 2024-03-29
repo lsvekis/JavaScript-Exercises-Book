@@ -1,0 +1,67 @@
+<!-- Objective: Build a custom workout planner. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Workout Planner</title>
+</head>
+<body>
+<h2>Create Your Workout Plan</h2>
+<form id="workoutForm">
+    <div id="exerciseInputs">
+        <div class="exerciseInput">
+            <input type="text" placeholder="Exercise Name" required>
+            <input type="number" placeholder="Sets" required>
+            <input type="number" placeholder="Reps" required>
+            <input type="number" placeholder="Rest (seconds)" required>
+        </div>
+    </div>
+    <button type="button" id="addExerciseBtn">Add Exercise</button>
+    <button type="submit">Save Workout Plan</button>
+</form>
+<div id="workoutPlansContainer">
+    <!-- Saved workout plans will be displayed here -->
+</div>
+<script>
+    document.getElementById('addExerciseBtn').addEventListener('click', () => {
+        const newExerciseInput = document.createElement('div');
+        newExerciseInput.className = 'exerciseInput';
+        newExerciseInput.innerHTML = `
+            <input type="text" placeholder="Exercise Name" required>
+            <input type="number" placeholder="Sets" required>
+            <input type="number" placeholder="Reps" required>
+            <input type="number" placeholder="Rest (seconds)" required>
+        `;
+        document.getElementById('exerciseInputs').appendChild(newExerciseInput);
+    });
+    let workoutPlans = JSON.parse(localStorage.getItem('workoutPlans')) || [];
+    document.getElementById('workoutForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const exercises = Array.from(document.getElementsByClassName('exerciseInput')).map(exerciseDiv => {
+            return {
+                name: exerciseDiv.children[0].value,
+                sets: exerciseDiv.children[1].value,
+                reps: exerciseDiv.children[2].value,
+                rest: exerciseDiv.children[3].value
+            };
+        });
+        workoutPlans.push(exercises);
+        localStorage.setItem('workoutPlans', JSON.stringify(workoutPlans));
+        displayWorkoutPlans();
+        this.reset(); // Reset form fields after saving
+    });
+    function displayWorkoutPlans() {
+        const container = document.getElementById('workoutPlansContainer');
+        container.innerHTML = ''; // Clear existing plans
+        workoutPlans.forEach((plan, index) => {
+            const planDiv = document.createElement('div');
+            plan.forEach(exercise => {
+                planDiv.innerHTML += `<div>${exercise.name}: ${exercise.sets} sets of ${exercise.reps} reps, rest ${exercise.rest}s</div>`;
+            });
+            container.appendChild(planDiv);
+        });
+    }
+    displayWorkoutPlans();
+</script>
+</body>
+</html>

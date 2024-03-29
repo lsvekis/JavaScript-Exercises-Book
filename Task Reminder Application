@@ -1,0 +1,45 @@
+<!-- Objective: Develop a task reminder application. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Task Reminder</title>
+</head>
+<body>
+<h2>Add New Task</h2>
+<form id="taskForm">
+ <input type="text" id="taskName" placeholder="Task Name" required>
+ <input type="datetime-local" id="taskDeadline" required>
+ <button type="submit">Add Task</button>
+</form>
+<ul id="taskList"></ul>
+<script>
+ const taskForm = document.getElementById('taskForm');
+ const taskList = document.getElementById('taskList');
+ let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+ function saveTasks() {
+ localStorage.setItem('tasks', JSON.stringify(tasks));
+ }
+ function addTaskToList(task) {
+ const listItem = document.createElement('li');
+ listItem.textContent = `${task.name} - due ${new Date(task.deadline).toLocaleString()}`;
+ taskList.appendChild(listItem);
+ }
+ function renderTasks() {
+ taskList.innerHTML = '';
+ tasks.forEach(addTaskToList);
+ }
+ taskForm.addEventListener('submit', function(e) {
+ e.preventDefault();
+ const taskName = document.getElementById('taskName').value;
+ const taskDeadline = document.getElementById('taskDeadline').value;
+ const task = { name: taskName, deadline: taskDeadline };
+ tasks.push(task);
+ saveTasks();
+ addTaskToList(task);
+ this.reset();
+ });
+ renderTasks();
+</script>
+</body>
+</html>

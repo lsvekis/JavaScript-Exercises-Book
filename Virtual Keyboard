@@ -1,0 +1,56 @@
+<!-- Objective: Create a virtual keyboard. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Virtual Keyboard</title>
+ <style>
+ .keyboard-container {
+ display: flex;
+ flex-wrap: wrap;
+ max-width: 600px;
+ margin: auto;
+ }
+ .key {
+ padding: 10px;
+ margin: 5px;
+ background-color: #f0f0f0;
+ text-align: center;
+ user-select: none;
+ cursor: pointer;
+ flex: 1 0 9%; /* Example size */
+ }
+ .input-area {
+ width: 100%;
+ margin: 20px 0;
+ }
+ </style>
+</head>
+<body>
+<input type="text" class="input-area" id="inputArea" readonly>
+<div class="keyboard-container" id="keyboardContainer"></div>
+<script>
+ const keys = [
+ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+ 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
+ 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
+ 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Backspace'
+ ];
+ const inputArea = document.getElementById('inputArea');
+ const keyboardContainer = document.getElementById('keyboardContainer');
+ keys.forEach(key => {
+ const keyElement = document.createElement('div');
+ keyElement.textContent = key;
+ keyElement.classList.add('key');
+ keyElement.addEventListener('click', () => {
+ if (key === 'Backspace') {
+ inputArea.value = inputArea.value.slice(0, -1);
+ } else {
+ inputArea.value += key;
+ }
+ });
+ keyboardContainer.appendChild(keyElement);
+ });
+</script>
+</body>
+</html>

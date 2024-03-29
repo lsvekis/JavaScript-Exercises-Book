@@ -1,0 +1,57 @@
+<!-- Objective: Develop a simple blogging platform. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Simple Blogging Platform</title>
+<style>
+ .post { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; }
+ .comment { margin-left: 20px; padding: 5px; border-left: 1px solid #ccc; }
+ </style>
+</head>
+<body>
+<h2>Create Post</h2>
+<form id="postForm">
+ <input type="text" id="postTitle" placeholder="Title" required>
+ <textarea id="postContent" placeholder="Content" required></textarea>
+ <button type="submit">Post</button>
+</form>
+<div id="postsContainer"></div>
+<script>
+ // Assuming existence of backend functions: fetchPosts, createPost
+ document.getElementById('postForm').addEventListener('submit', function(e) {
+ e.preventDefault();
+ const title = document.getElementById('postTitle').value.trim();
+ const content = document.getElementById('postContent').value.trim();
+ // Example: createPost({ title, content }).then(refreshPosts);
+ // Clear form fields
+ document.getElementById('postTitle').value = '';
+ document.getElementById('postContent').value = '';
+ });
+ function displayPosts(posts) {
+ const postsContainer = document.getElementById('postsContainer');
+ postsContainer.innerHTML = ''; // Clear existing posts
+ posts.forEach(post => {
+ const postElement = document.createElement('div');
+ postElement.className = 'post';
+ postElement.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
+ // Example comments display, assuming post.comments exists
+ if (post.comments) {
+ post.comments.forEach(comment => {
+ const commentElement = document.createElement('div');
+ commentElement.className = 'comment';
+ commentElement.textContent = comment;
+ postElement.appendChild(commentElement);
+ });
+ }
+ postsContainer.appendChild(postElement);
+ });
+ }
+ function refreshPosts() {
+ // Example: fetchPosts().then(displayPosts);
+ }
+ // Initial posts load
+ refreshPosts();
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!-- Objective: Develop an infinite scrolling content loader. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Infinite Scrolling Content Loader</title>
+</head>
+<body>
+<div id="contentContainer">
+    <!-- Initial content will be loaded here -->
+</div>
+<div id="loading">Loading more content...</div>
+<script>
+    let contentLoaded = false;
+    const loadingDiv = document.getElementById('loading');
+    function fetchContent() {
+        if (contentLoaded) return;
+        contentLoaded = true;
+        loadingDiv.style.display = 'block';
+        // Simulate fetching content
+        setTimeout(() => {
+            const contentContainer = document.getElementById('contentContainer');
+            for (let i = 0; i < 5; i++) { // Simulate adding 5 new content items
+                const newContent = document.createElement('div');
+                newContent.textContent = `Content item ${contentContainer.children.length + 1}`;
+                contentContainer.appendChild(newContent);
+            }
+            loadingDiv.style.display = 'none';
+            contentLoaded = false;
+        }, 1000); // Simulated delay
+    }
+    window.addEventListener('scroll', () => {
+        if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+            fetchContent();
+        }
+    });
+    // Initial content load
+    fetchContent();
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!-- Objective: Create a personal budget planner. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Personal Budget Planner</title>
+</head>
+<body>
+<h2>Monthly Budget Planner</h2>
+<form id="budgetForm">
+ <input type="text" id="categoryName" placeholder="Category Name" required>
+ <input type="number" id="budgetAmount" placeholder="Planned Amount" required>
+ <button type="submit">Add Category</button>
+</form>
+<div id="budgetOverview">Budget overview will be displayed here.</div>
+<script>
+ let budgetCategories = JSON.parse(localStorage.getItem('budgetCategories')) || [];
+ document.getElementById('budgetForm').addEventListener('submit', function(e) {
+ e.preventDefault();
+ const category = document.getElementById('categoryName').value.trim();
+ const amount = parseFloat(document.getElementById('budgetAmount').value);
+ budgetCategories.push({ category, amount });
+ localStorage.setItem('budgetCategories', JSON.stringify(budgetCategories));
+ displayBudgetOverview();
+ this.reset(); // Reset form fields
+ });
+ function displayBudgetOverview() {
+ const overviewDiv = document.getElementById('budgetOverview');
+ overviewDiv.innerHTML = ''; // Clear existing content
+ budgetCategories.forEach(item => {
+ overviewDiv.innerHTML += `<div>${item.category}: $${item.amount}</div>`;
+ });
+ // Additional functionality to visualize data can be added here
+ }
+ displayBudgetOverview();
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!-- Objective: Create a markdown note editor with live preview. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Markdown Note Editor</title>
+ <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<div style="display: flex;">
+ <textarea id="markdownInput" style="width: 50%; height: 300px;"></textarea>
+ <div id="preview" style="width: 50%; padding: 10px; border: 1px solid #ddd;"></div>
+</div>
+<script>
+ document.getElementById('markdownInput').addEventListener('input', function() {
+ const rawMarkdown = this.value;
+ document.getElementById('preview').innerHTML = marked.parse(rawMarkdown);
+ });
+</script>
+</body>
+</html>

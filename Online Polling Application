@@ -1,0 +1,46 @@
+<!-- Objective: Develop an online polling application. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Online Polling Application</title>
+</head>
+<body>
+<h2>Create Poll</h2>
+<form id="pollForm">
+ <input type="text" id="pollQuestion" placeholder="Poll Question" required>
+ <div id="pollOptionsContainer">
+ <input type="text" class="pollOption" placeholder="Option 1" required>
+ <!-- Additional options will be added here dynamically -->
+ </div>
+ <button type="button" id="addOptionBtn">Add Option</button>
+ <button type="submit">Create Poll</button>
+</form>
+<h2>Current Polls</h2>
+<div id="pollsContainer">
+ <!-- Polls will be displayed here -->
+</div>
+<script>
+ document.getElementById('addOptionBtn').addEventListener('click', () => {
+ const newOption = document.createElement('input');
+ newOption.setAttribute('type', 'text');
+ newOption.setAttribute('class', 'pollOption');
+ newOption.setAttribute('placeholder', `Option ${document.querySelectorAll('.pollOption').length + 1}`);
+ document.getElementById('pollOptionsContainer').appendChild(newOption);
+ });
+ document.getElementById('pollForm').addEventListener('submit', function(e) {
+ e.preventDefault();
+ const question = document.getElementById('pollQuestion').value.trim();
+ const options = Array.from(document.querySelectorAll('.pollOption')).map(option => option.value.trim());
+ // Logic to save the poll to the backend or local storage
+ // Display the newly created poll in the pollsContainer
+ });
+ // Function to render polls in the pollsContainer
+ function displayPolls() {
+ // Logic to retrieve and display polls
+ }
+ // Initial call to display existing polls
+ displayPolls();
+</script>
+</body>
+</html>

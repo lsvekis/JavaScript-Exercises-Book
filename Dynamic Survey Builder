@@ -1,0 +1,35 @@
+<!-- Objective: Create a dynamic survey builder. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Dynamic Survey Builder</title>
+</head>
+<body>
+<h2>Create Survey</h2>
+<div id="surveyForm">
+ <button type="button" id="addQuestionBtn">Add Question</button>
+ <!-- Questions will be added here dynamically -->
+</div>
+<button type="submit" id="saveSurveyBtn">Save Survey</button>
+<script>
+ document.getElementById('addQuestionBtn').addEventListener('click', () => {
+ const questionDiv = document.createElement('div');
+ questionDiv.innerHTML = `
+ <input type="text" placeholder="Question">
+ <select>
+ <option value="text">Text</option>
+ <option value="multipleChoice">Multiple Choice</option>
+ <!-- More question types -->
+ </select>
+ <!-- Additional inputs based on question type -->
+ `;
+ document.getElementById('surveyForm').appendChild(questionDiv);
+ });
+ // Implement saving functionality for the survey
+ document.getElementById('saveSurveyBtn').addEventListener('click', () => {
+ // Logic to save the constructed survey
+ });
+</script>
+</body>
+</html>

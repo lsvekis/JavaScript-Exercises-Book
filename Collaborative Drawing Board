@@ -1,0 +1,40 @@
+<!-- Objective: Create a collaborative drawing board. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Collaborative Drawing Board</title>
+</head>
+<body>
+<canvas id="drawingCanvas" width="800" height="600" style="border:1px solid #000;"></canvas>
+<script>
+ const canvas = document.getElementById('drawingCanvas');
+ const context = canvas.getContext('2d');
+ // Example: Initialize WebSocket connection (WebSocket server URL required)
+ // const ws = new WebSocket('ws://your-websocket-server-url');
+ canvas.addEventListener('mousedown', startDrawing);
+ canvas.addEventListener('mouseup', stopDrawing);
+ canvas.addEventListener('mousemove', draw);
+ let drawing = false;
+ function startDrawing(e) {
+ drawing = true;
+ draw(e); // To start drawing immediately
+ }
+ function stopDrawing() {
+ drawing = false;
+ context.beginPath(); // Begin a new path to not connect lines
+ }
+ function draw(e) {
+ if (!drawing) return;
+ context.lineWidth = 2; // Set the line width
+ context.lineCap = 'round'; // Set the line cap
+ context.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+ context.stroke();
+ context.beginPath();
+ context.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+ // Example: Send drawing data via WebSocket
+ // ws.send(JSON.stringify({ x: e.clientX, y: e.clientY }));
+ }
+</script>
+</body>
+</html>

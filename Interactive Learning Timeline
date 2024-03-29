@@ -1,0 +1,33 @@
+<!-- Objective: Develop an interactive learning timeline. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Learning Timeline</title>
+</head>
+<body>
+<h2>My Learning Timeline</h2>
+<button id="addMilestoneBtn">Add Milestone</button>
+<div id="timelineContainer">Timeline will be built here.</div>
+<script>
+ let milestones = JSON.parse(localStorage.getItem('milestones')) || [];
+ document.getElementById('addMilestoneBtn').addEventListener('click', () => {
+ const milestoneTitle = prompt("Enter milestone title:");
+ const milestoneDate = prompt("Enter milestone date:");
+ milestones.push({ title: milestoneTitle, date: milestoneDate });
+ localStorage.setItem('milestones', JSON.stringify(milestones));
+ buildTimeline();
+ });
+ function buildTimeline() {
+ const container = document.getElementById('timelineContainer');
+ container.innerHTML = ''; // Clear current timeline
+ milestones.forEach(milestone => {
+ const milestoneElement = document.createElement('div');
+ milestoneElement.textContent = `${milestone.title} - ${milestone.date}`;
+ container.appendChild(milestoneElement);
+ });
+ }
+ buildTimeline();
+</script>
+</body>
+</html>

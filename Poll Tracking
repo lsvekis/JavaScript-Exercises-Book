@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poll Results</title>
+    <style>
+        .option { margin: 5px; }
+        .vote-count { margin-left: 10px; }
+        #voteCounts { display: none; } /* Initially hide the vote counts */
+    </style>
+</head>
+<body>
+    <h2 id="pollQuestion">What is your favorite programming language?</h2>
+    <div id="pollOptions">
+        <button class="option" data-option="JavaScript">JavaScript</button>
+        <button class="option" data-option="Python">Python</button>
+        <button class="option" data-option="C#">C#</button>
+        <button class="option" data-option="Java">Java</button>
+        <!-- More options can be added here -->
+    </div>
+    <h3>Votes:</h3>
+    <div id="voteCounts"></div>
+    <script>
+        const voteCounts = {
+    JavaScript: 0,
+    Python: 0,
+    "C#": 0,
+    Java: 0
+};
+document.querySelectorAll('.option').forEach(button => {
+    button.addEventListener('click', function() {
+        const option = this.getAttribute('data-option');
+        voteCounts[option]++;
+        updateDisplay();
+        document.getElementById('voteCounts').style.display = 'block'; // Show the vote counts
+    });
+});
+function updateDisplay() {
+    const display = document.getElementById('voteCounts');
+    display.innerHTML = ''; // Clear current display
+    for (const option in voteCounts) {
+        const count = voteCounts[option];
+        const div = document.createElement('div');
+        div.textContent = `${option}: ${count} votes`;
+        display.appendChild(div);
+    }
+}
+// The initial display function call is removed since we don't want to display the counts initially
+    </script>
+</body>
+</html>
